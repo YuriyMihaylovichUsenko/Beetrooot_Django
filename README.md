@@ -1,1 +1,0 @@
-# Beetrooot_Django
