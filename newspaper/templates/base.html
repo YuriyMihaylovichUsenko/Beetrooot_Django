@@ -1,0 +1,186 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en" class="no-js">
+<head>
+    <!-- Meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <title>{% block title %}HEWO - Modern Newspaper/Publisher Template{% endblock %}</title>
+
+	<!-- Bootstrap, Font Awesome, Aminate, Owl Carausel, Normalize CSS -->
+    <link href="{% static 'css/bootstrap.css' %}" rel="stylesheet" type="text/css"/>
+    <link href="{% static 'css/font-awesome.min.css' %}" rel="stylesheet" type="text/css"/>
+    <link href="{% static 'css/animate.css' %}" rel="stylesheet" type="text/css"/>
+    <link href="{% static 'css/owl.carousel.css' %}" rel="stylesheet" type="text/css"/>
+    <link href="{% static 'css/owl.theme.default.css' %}" rel="stylesheet" type="text/css"/>
+    <link href="{% static 'css/normalize.css' %}" rel="stylesheet" type="text/css"/>
+    <link href="{% static 'css/slicknav.min.css' %}" rel="stylesheet" type="text/css"/>
+
+	<!-- Site CSS -->
+
+    <link href="{% static 'css/main.css' %}" rel="stylesheet" type="text/css"/>
+	<link href="{% static 'css/responsive.css' %}" rel="stylesheet" type="text/css"/>
+
+    <!-- Modernizr JS -->
+    <script src="{% static 'js/modernizr-3.5.0.min.js' %}"></script>
+
+	<!--favincon-->
+	<link rel="apple-touch-icon" sizes="57x57" href="{% static 'images/favicon/apple-icon-57x57.png' %}' %}">
+	<link rel="apple-touch-icon" sizes="60x60" href="{% static 'images/favicon/apple-icon-60x60.png' %}">
+	<link rel="apple-touch-icon" sizes="72x72" href="{% static 'images/favicon/apple-icon-72x72.png' %}">
+	<link rel="apple-touch-icon" sizes="76x76" href="{% static 'images/favicon/apple-icon-76x76.png' %}">
+	<link rel="apple-touch-icon" sizes="114x114" href="{% static 'images/favicon/apple-icon-114x114.png' %}">
+	<link rel="apple-touch-icon" sizes="120x120" href="{% static 'images/favicon/apple-icon-120x120.png' %}">
+	<link rel="apple-touch-icon" sizes="144x144" href="{% static 'images/favicon/apple-icon-144x144.png' %}">
+	<link rel="apple-touch-icon" sizes="152x152" href="{% static 'images/favicon/apple-icon-152x152.png' %}">
+	<link rel="apple-touch-icon" sizes="180x180" href="{% static 'images/favicon/apple-icon-180x180.png' %}">
+	<link rel="icon" type="image/png" sizes="192x192"  href="{% static 'images/favicon/android-icon-192x192.png' %}">
+	<link rel="icon" type="image/png" sizes="32x32" href="{% static 'images/favicon/favicon-32x32.png' %}">
+	<link rel="icon" type="image/png" sizes="96x96" href="{% static 'images/favicon/favicon-96x96.png' %}">
+	<link rel="icon" type="image/png" sizes="16x16" href="{% static 'images/favicon/favicon-16x16.png' %}">
+	<link rel="manifest" href="{% static 'images/favicon/manifest.json' %}">
+	<meta name="msapplication-TileColor" content="#ffffff">
+	<meta name="msapplication-TileImage" content="{% static 'images/favicon/ms-icon-144x144.png' %}">
+	<meta name="theme-color" content="#ffffff">
+	<!-- Google fonts -->
+	<link href="https://fonts.googleapis.com/css?family=IBM+Plex+Serif:300,400,500" rel="stylesheet">
+	<link href="https://fonts.googleapis.com/css?family=Playfair+Display" rel="stylesheet">
+	<!--Poprup-->
+    <link href="{% static 'css/popup.css' %}" rel="stylesheet">
+     <script src="{% static 'js/jquery.min.js' %}"></script>
+    <script src="{% static 'js/jquery.bpopup.min.js' %}"></script>
+    <script>
+    $( document ).ready(function() {
+        $('#popup_this').bPopup();
+    });
+    </script>
+</head>
+<body>
+	<div class="spinner-cover">
+		<div class="spinner-inner">
+			<div class="spinner">
+			  <div class="rect1"></div>
+			  <div class="rect2"></div>
+			  <div class="rect3"></div>
+			  <div class="rect4"></div>
+			  <div class="rect5"></div>
+			</div>
+		</div>
+	</div>
+	<div class="spinner-cover">
+		<div class="spinner-inner">
+			<div class="spinner">
+			  <div class="rect1"></div>
+			  <div class="rect2"></div>
+			  <div class="rect3"></div>
+			  <div class="rect4"></div>
+			  <div class="rect5"></div>
+			</div>
+		</div>
+	</div>
+	<div id="wrapper">
+		<div id="sidebar-wrapper">
+			<div class="sidebar-inner">
+				<div class="off-canvas-close"><span>CLOSE</span></div>
+				<div class="sidebar-widget">
+					<div class="widget-title-cover">
+						<h4 class="widget-title"><span>Popular Articles</span></h4>
+					</div>
+					<ul class="menu" id="sidebar-menu">
+						<li class="menu-item"><a href="index.html#">Trending</a></li>
+						<li class="menu-item menu-item-has-children"><a href="index.html#">Thinking</a>
+							<ul class="sub-menu">
+								<li class="menu-item"><a href="index.html#">Home &amp; Living</a></li>
+								<li class="menu-item menu-item-has-children"><a href="index.html#">Lifestyle</a>
+									<ul class="sub-menu">
+										<li class="menu-item"><a href="index.html#">Travel</a></li>
+										<li class="menu-item"><a href="index.html#">Gardening</a></li>
+										<li class="menu-item"><a href="index.html#">Inspirations</a></li>
+									</ul>
+								</li>
+								<li class="menu-item"><a href="index.html#">Inspirations</a></li>
+								<li class="menu-item"><a href="index.html#">Gardening</a></li>
+							</ul>
+						</li>
+						<li class="menu-item menu-item-has-children"><a href="index.html#">Inspirations</a>
+							<ul class="sub-menu">
+								<li class="menu-item"><a href="index.html#">House &amp; Living</a></li>
+								<li class="menu-item"><a href="index.html#">Travel</a></li>
+							</ul>
+						</li>
+						<li class="menu-item"><a href="index.html#">Contact</a></li>
+					</ul>
+				</div>
+
+				<div class="sidebar-widget">
+					<div class="widget-title-cover"><h4 class="widget-title"><span>Trending</span></h4></div>
+					<div class="latest_style_2">
+						<div class="latest_style_2_item_first">
+							<figure class="alith_post_thumb_big">
+								<span class="post_meta_categories_label">Legal, Blog</span>
+								<a href="single.html"><img src="{% static 'images/thumb-large.jpg' %}" alt=""/></a>
+							</figure>
+							<h3 class="alith_post_title">
+								<a href="single.html"><strong>Nor again is there anyone who loves or pursues or desires to obtain</strong></a>
+							</h3>
+						</div>
+						<div class="latest_style_2_item">
+							<figure class="alith_news_img"><a href="single.html"><img src="{% static 'images/thumb-square-1.png' %}" alt=""/></a></figure>
+							<h3 class="alith_post_title"><a href="single.html">Magna aliqua ut enim ad minim veniam quis </a></h3>
+
+							<div class="post_meta">
+								<p class="meta"><span>2 Sep, 2018</span> <span>268 views</span></p>
+							</div>
+						</div>
+						<div class="latest_style_2_item">
+							<figure class="alith_news_img"><a href="single.html"><img src="{% static 'images/thumb-square-2.png' %}" alt=""/></a></figure>
+							<h3 class="alith_post_title"><a href="single.html">Magna aliqua ut enim ad minim veniam</a></h3>
+							<div class="post_meta">
+								<span class="meta_date">18 Sep, 2018</span>
+							</div>
+						</div>
+						<div class="latest_style_2_item">
+							<figure class="alith_news_img"><a href="single.html"><img src="{% static 'images/thumb-square-3.png' %}" alt=""/></a></figure>
+							<h3 class="alith_post_title"><a href="single.html">Magna aliqua ut enim ad minim veniam</a></h3>
+							<div class="post_meta">
+								<span class="meta_date">18 Sep, 2018</span>
+							</div>
+						</div>
+					</div>
+				</div> <!--.sidebar-widget-->
+
+				<div class="sidebar-widget">
+					<div class="widget-title-cover"><h4 class="widget-title"><span>Advertise</span></h4></div>
+					<div class="banner-adv">
+						<div class="adv-thumb">
+							<a href="index.html#">
+								<img class="aligncenter" alt="img1" src="{% static 'images/ads.jpg' %}">
+							</a>
+						</div>
+					</div>
+				</div> <!--.sidebar-widget-->
+			</div>
+        </div>		<!--#sidebar-wrapper-->
+
+        {% block main %} {% endblock main %}
+
+		 <!-- ads popup -->
+        <div id="popup_this">
+            <span class="button b-close">
+                <span>X</span>
+            </span>
+            <a href="https://alithemes.com/downloads/hewo-wordpress" target="_blank"><img src="{% static 'images/wp-version.png' %}" alt="ads"></a>
+        </div>
+
+		<script src="{% static 'js/owl.carousel.min.js' %}"></script>
+		<script src="{% static 'js/jquery.waypoints.min.js' %}"></script>
+		<script src="{% static 'js/jquery.slicknav.min.js' %}"></script>
+		<script src="{% static 'js/masonry.pkgd.min.js' %}"></script>
+		<!-- Main -->
+		<script src="{% static 'js/main.js' %}"></script>
+		<script src="{% static 'js/smart-sticky.js' %}"></script>
+		<script src="{% static 'js/theia-sticky-sidebar.js' %}"></script>
+	</div> <!--#wrapper-->
+</body>
+</html>
