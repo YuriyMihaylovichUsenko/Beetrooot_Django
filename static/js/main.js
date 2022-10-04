@@ -25,8 +25,8 @@
 		$('#slider-carousel').owlCarousel({
             loop: true,
             margin: 0,
-            dots: false,
-            nav: false,
+            // dots: false,
+            // nav: false,
             responsive: {
                 0: {
                     items: 1
