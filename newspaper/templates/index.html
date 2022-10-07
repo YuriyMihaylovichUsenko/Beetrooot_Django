@@ -83,13 +83,14 @@
             <div class="row">
                 <div class="col-md-8">
                     <div class="owl-carousel owl-theme js section_margin line_hoz animate-box" id="slideshow_face">
+                        {% for article in articles %}
                         <div class="item">
                             <figure class="alith_post_thumb_big">
                                 <span class="post_meta_categories_label">Legal, Blog</span>
-                                <a href="single.html"><img src="{% static 'images/slideshow-1.jpg' %}" alt=""/></a>
+                                <a href="{% url 'single' article.slug %}"><img src="{{ article.images.first.image.url }}" alt=""/></a>
                             </figure>
                             <h3 class="alith_post_title animate-box" data-animate-effect="fadeInUp">
-                                <a href="single.html">Lorem ipsum dui sollic itudin praesent ut mollis primis eros torquent fames</a>
+                                <a href="{% url 'single' article.slug %}">{{ article.title }}</a>
                             </h3>
                             <div class="alith_post_content_big">
                                 <div class="row">
@@ -106,141 +107,73 @@
                                 </div>
                             </div>
                         </div>
-                        <div class="item">
-                            <figure class="alith_post_thumb_big">
-                                <span class="post_meta_categories_label">Fashion, Men</span>
-                                <a href="index.html#"><img src="{% static 'images/slideshow-2.jpg' %}" alt=""/></a>
-                            </figure>
-                            <h3 class="alith_post_title animate-box" data-animate-effect="fadeInUp">
-                                <a href="single.html">Lorem ipsum dui sollic itudin praesent ut mollis primis eros torquent fames</a>
-                            </h3>
-                            <div class="alith_post_content_big">
-                                <div class="row">
-                                    <div class="col-md-4 col-sm-12">
-                                        <div class="post_meta_center animate-box">
-                                            <p><a href="page-author.html"><img src="{% static 'images/author-avatar.png' %}" alt="author details"/></a></p>
-                                            <p><a href="page-author.html" class="author"><strong>Steven Job</strong></a></p>
-                                            <span class="post_meta_date">21 Sep, 2018</span>
-                                        </div>
-                                    </div>
-                                    <div class="col-md-8 col-sm-12 animate-box">
-                                        <p class="alith_post_except">Is very common and rather normal for blogging beginners to be highly perplexed when it comes to selecting a theme for their blog. There are a plethora of free as well as paid options.</p>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="item">
-                            <figure class="alith_post_thumb_big">
-                                <span class="post_meta_categories_label">Entertainment, Style</span>
-                                <a href="index.html#"><img src="{% static 'images/slideshow-3.jpg' %}" alt=""/></a>
-                            </figure>
-                            <h3 class="alith_post_title animate-box" data-animate-effect="fadeInUp">
-                                <a href="single.html">Lorem ipsum dui sollic itudin praesent ut mollis primis eros torquent fames</a>
-                            </h3>
-                            <div class="alith_post_content_big">
-                                <div class="row">
-                                    <div class="col-md-4 col-sm-12">
-                                        <div class="post_meta_center animate-box">
-                                            <p><a href="page-author.html"><img src="{% static 'images/author-avatar.png' %}" alt="author details"/></a></p>
-                                            <p><a href="page-author.html" class="author"><strong>Steven Job</strong></a></p>
-                                            <span class="post_meta_date">23 Sep, 2018</span>
-                                        </div>
-                                    </div>
-                                    <div class="col-md-8 col-sm-12 animate-box">
-                                        <p class="alith_post_except">Is very common and rather normal for blogging beginners to be highly perplexed when it comes to selecting a theme for their blog. There are a plethora of free as well as paid options.</p>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
+                        {% endfor %}
+{#                        <div class="item">#}
+{#                            <figure class="alith_post_thumb_big">#}
+{#                                <span class="post_meta_categories_label">Fashion, Men</span>#}
+{#                                <a href="index.html#"><img src="{% static 'images/slideshow-2.jpg' %}" alt=""/></a>#}
+{#                            </figure>#}
+{#                            <h3 class="alith_post_title animate-box" data-animate-effect="fadeInUp">#}
+{#                                <a href="single.html">Lorem ipsum dui sollic itudin praesent ut mollis primis eros torquent fames</a>#}
+{#                            </h3>#}
+{#                            <div class="alith_post_content_big">#}
+{#                                <div class="row">#}
+{#                                    <div class="col-md-4 col-sm-12">#}
+{#                                        <div class="post_meta_center animate-box">#}
+{#                                            <p><a href="page-author.html"><img src="{% static 'images/author-avatar.png' %}" alt="author details"/></a></p>#}
+{#                                            <p><a href="page-author.html" class="author"><strong>Steven Job</strong></a></p>#}
+{#                                            <span class="post_meta_date">21 Sep, 2018</span>#}
+{#                                        </div>#}
+{#                                    </div>#}
+{#                                    <div class="col-md-8 col-sm-12 animate-box">#}
+{#                                        <p class="alith_post_except">Is very common and rather normal for blogging beginners to be highly perplexed when it comes to selecting a theme for their blog. There are a plethora of free as well as paid options.</p>#}
+{#                                    </div>#}
+{#                                </div>#}
+{#                            </div>#}
+{#                        </div>#}
+{#                        <div class="item">#}
+{#                            <figure class="alith_post_thumb_big">#}
+{#                                <span class="post_meta_categories_label">Entertainment, Style</span>#}
+{#                                <a href="index.html#"><img src="{% static 'images/slideshow-3.jpg' %}" alt=""/></a>#}
+{#                            </figure>#}
+{#                            <h3 class="alith_post_title animate-box" data-animate-effect="fadeInUp">#}
+{#                                <a href="single.html">Lorem ipsum dui sollic itudin praesent ut mollis primis eros torquent fames</a>#}
+{#                            </h3>#}
+{#                            <div class="alith_post_content_big">#}
+{#                                <div class="row">#}
+{#                                    <div class="col-md-4 col-sm-12">#}
+{#                                        <div class="post_meta_center animate-box">#}
+{#                                            <p><a href="page-author.html"><img src="{% static 'images/author-avatar.png' %}" alt="author details"/></a></p>#}
+{#                                            <p><a href="page-author.html" class="author"><strong>Steven Job</strong></a></p>#}
+{#                                            <span class="post_meta_date">23 Sep, 2018</span>#}
+{#                                        </div>#}
+{#                                    </div>#}
+{#                                    <div class="col-md-8 col-sm-12 animate-box">#}
+{#                                        <p class="alith_post_except">Is very common and rather normal for blogging beginners to be highly perplexed when it comes to selecting a theme for their blog. There are a plethora of free as well as paid options.</p>#}
+{#                                    </div>#}
+{#                                </div>#}
+{#                            </div>#}
+{#                        </div>#}
                     </div>
                     <div class="post_list post_list_style_1">
                         <div class="alith_heading">
                             <h2 class="alith_heading_patern_2">Recent Posts</h2>
                         </div>
+                        {% for article in articles %}
                         <article class="row section_margin animate-box">
                             <div class="col-md-3 animate-box">
-                                <figure class="alith_news_img"><a href="single.html"><img src="{% static 'images/thumb_medium_1.png' %}" alt=""/></a></figure>
+                                <figure class="alith_news_img"><a href="{% url 'single' article.slug %}"><img src="{{ article.images.first.image.url }}" alt="{{ article.name }}"/></a></figure>
                             </div>
                             <div class="col-md-9 animate-box">
-                                <h3 class="alith_post_title"><a href="single.html">Magna aliqua ut enim ad minim veniam</a></h3>
+                                <h3 class="alith_post_title"><a href="{% url 'single' article.slug %}">{{ article.title }}</a></h3>
                                 <div class="post_meta">
-                                    <a href="page-author.html" class="meta_author_avatar"><img src="{% static 'images/author-avatar.png' %}" alt="author details"/></a>
-                                    <span class="meta_author_name"><a href="page-author.html" class="author">Steven Job</a></span>
-                                    <span class="meta_categories"><a href="http://demos.alithemes.com/html/hewo/archive.html">Politics</a>, <a href="http://demos.alithemes.com/html/hewo/archive.html">News</a></span>
-                                    <span class="meta_date">18 Sep, 2018</span>
+                                    <span class="meta_author_name"><a href="page-author.html" class="author">Unknown author</a></span>
+                                    <span class="meta_categories"><a href="{% url 'category' article.category.slug %}">{{ article.category }}</a></span>
+                                    <span class="meta_date">{{ article.date_news }}</span>
                                 </div>
                             </div>
                         </article>
-                        <article class="row section_margin animate-box">
-                            <div class="col-md-3 animate-box">
-                                <figure class="alith_news_img"><a href="single.html"><img src="{% static 'images/thumb_medium_2.png' %}" alt=""/></a></figure>
-                            </div>
-                            <div class="col-md-9 animate-box">
-                                <h3 class="alith_post_title"><a href="single.html">Letraset sheets containing Lorem Ipsum passages, and more recently</a></h3>
-                                <div class="post_meta">
-                                    <a href="page-author.html" class="meta_author_avatar"><img src="{% static 'images/author-avatar.png' %}" alt="author details"/></a>
-                                    <span class="meta_author_name"><a href="page-author.html" class="author">Steven Job</a></span>
-                                    <span class="meta_categories"><a href="http://demos.alithemes.com/html/hewo/archive.html">Politics</a>, <a href="http://demos.alithemes.com/html/hewo/archive.html">News</a></span>
-                                    <span class="meta_date">18 Sep, 2018</span>
-                                </div>
-                            </div>
-                        </article>
-                        <article class="row section_margin animate-box">
-                            <div class="col-md-3 animate-box">
-                                <figure class="alith_news_img"><a href="single.html"><img src="{% static 'images/thumb_medium_3.png' %}" alt=""/></a></figure>
-                            </div>
-                            <div class="col-md-9 animate-box">
-                                <h3 class="alith_post_title"><a href="single.html">There are many variations of passages of Lorem Ipsum available, but the majority have suffered</a></h3>
-                                <div class="post_meta">
-                                    <a href="page-author.html" class="meta_author_avatar"><img src="{% static 'images/author-avatar.png' %}" alt="author details"/></a>
-                                    <span class="meta_author_name"><a href="page-author.html" class="author">Steven Job</a></span>
-                                    <span class="meta_categories"><a href="http://demos.alithemes.com/html/hewo/archive.html">Politics</a>, <a href="http://demos.alithemes.com/html/hewo/archive.html">News</a></span>
-                                    <span class="meta_date">18 Sep, 2018</span>
-                                </div>
-                            </div>
-                        </article>
-                        <article class="row section_margin animate-box">
-                            <div class="col-md-3 animate-box">
-                                <figure class="alith_news_img"><a href="single.html"><img src="{% static 'images/thumb_medium_4.png' %}" alt=""/></a></figure>
-                            </div>
-                            <div class="col-md-9 animate-box">
-                                <h3 class="alith_post_title"><a href="single.html">It uses a dictionary of over 200 Latin words, combined</a></h3>
-                                <div class="post_meta">
-                                    <a href="page-author.html" class="meta_author_avatar"><img src="{% static 'images/author-avatar.png' %}" alt="author details"/></a>
-                                    <span class="meta_author_name"><a href="page-author.html" class="author">Steven Job</a></span>
-                                    <span class="meta_categories"><a href="http://demos.alithemes.com/html/hewo/archive.html">Politics</a>, <a href="http://demos.alithemes.com/html/hewo/archive.html">News</a></span>
-                                    <span class="meta_date">18 Sep, 2018</span>
-                                </div>
-                            </div>
-                        </article>
-                        <article class="row section_margin animate-box">
-                            <div class="col-md-3 animate-box">
-                                <figure class="alith_news_img"><a href="single.html"><img src="{% static 'images/thumb_medium_5.png' %}" alt=""/></a></figure>
-                            </div>
-                            <div class="col-md-9 animate-box">
-                                <h3 class="alith_post_title"><a href="single.html">Reading is not only informed by what’s going on with us at that moment</a></h3>
-                                <div class="post_meta">
-                                    <a href="page-author.html" class="meta_author_avatar"><img src="{% static 'images/author-avatar.png' %}" alt="author details"/></a>
-                                    <span class="meta_author_name"><a href="page-author.html" class="author">Steven Job</a></span>
-                                    <span class="meta_categories"><a href="http://demos.alithemes.com/html/hewo/archive.html">Politics</a>, <a href="http://demos.alithemes.com/html/hewo/archive.html">News</a></span>
-                                    <span class="meta_date">18 Sep, 2018</span>
-                                </div>
-                            </div>
-                        </article>
-                        <article class="row section_margin animate-box">
-                            <div class="col-md-3 animate-box">
-                                <figure class="alith_news_img"><a href="single.html"><img src="{% static 'images/thumb_medium_6.png' %}" alt=""/></a></figure>
-                            </div>
-                            <div class="col-md-9 animate-box">
-                                <h3 class="alith_post_title"><a href="single.html">What you see and what you’re experiencing as you read these</a></h3>
-                                <div class="post_meta">
-                                    <a href="page-author.html" class="meta_author_avatar"><img src="{% static 'images/author-avatar.png' %}" alt="author details"/></a>
-                                    <span class="meta_author_name"><a href="page-author.html" class="author">Steven Job</a></span>
-                                    <span class="meta_categories"><a href="http://demos.alithemes.com/html/hewo/archive.html">Politics</a>, <a href="http://demos.alithemes.com/html/hewo/archive.html">News</a></span>
-                                    <span class="meta_date">18 Sep, 2018</span>
-                                </div>
-                            </div>
-                        </article>
+                        {% endfor %}
 
                     <div class="site-pagination animate-box">
                         <ul class="page-numbers">
@@ -255,249 +188,14 @@
                     </div>
                 </div>
                 <!--Start Sidebar-->
-                <aside class="col-md-4 sidebar_right">
-                    <div class="sidebar-widget animate-box">
-                        <div class="widget-title-cover"><h4 class="widget-title"><span>Popular Articles</span></h4></div>
-                        <div class="latest_style_1">
-                            <div class="latest_style_1_item">
-                              <span class="item-count vertical-align">1.</span>
-                                <div class="alith_post_title_small">
-                                    <a href="single.html"><strong>Ut enim ad minima veniam, quis nostrum</strong></a>
-                                    <p class="meta"><span>2 Sep, 2018</span> <span>268 views</span></p>
-                                </div>
-                                <figure class="alith_news_img"><a href="single.html"><img src="{% static 'images/thumb-square-1.png' %}" alt=""/></a></figure>
-                            </div>
-                            <div class="latest_style_1_item">
-                              <span class="item-count vertical-align">2.</span>
-                                <div class="alith_post_title_small">
-                                    <a href="single.html"><strong>Curae lacinia consec tetur varius</strong></a>
-                                    <p class="meta"><span>2 Sep, 2018</span> <span>268 views</span></p>
-                                </div>
-                                <figure class="alith_news_img"><a href="single.html"><img src="{% static 'images/thumb-square-2.png' %}" alt=""/></a></figure>
-                            </div>
-                            <div class="latest_style_1_item">
-                              <span class="item-count vertical-align">3.</span>
-                                <div class="alith_post_title_small">
-                                    <a href="single.html"><strong>Euismod lacus vulpu tate augue</strong></a>
-                                    <p class="meta"><span>2 Sep, 2018</span> <span>268 views</span></p>
-                                </div>
-                                <figure class="alith_news_img"><a href="single.html"><img src="{% static 'images/thumb-square-3.png' %}" alt=""/></a></figure>
-                            </div>
-                            <div class="latest_style_1_item">
-                              <span class="item-count vertical-align">4.</span>
-                                <div class="alith_post_title_small">
-                                    <a href="single.html"><strong>Quam mauris lorem erat est euismod</strong></a>
-                                    <p class="meta"><span>2 Sep, 2018</span> <span>268 views</span></p>
-                                </div>
-                                <figure class="alith_news_img"><a href="single.html"><img src="{% static 'images/thumb-square-4.png' %}" alt=""/></a></figure>
-                            </div>
-                            <div class="latest_style_1_item">
-                              <span class="item-count vertical-align">5.</span>
-                                <div class="alith_post_title_small">
-                                    <a href="single.html"><strong>Nec eget ince ptos aenean gravida</strong></a>
-                                    <p class="meta"><span>2 Sep, 2018</span> <span>268 views</span></p>
-                                </div>
-                                <figure class="alith_news_img"><a href="single.html"><img src="{% static 'images/thumb-square-5.png' %}" alt=""/></a></figure>
-                            </div>
-                        </div>
-                    </div> <!--.sidebar-widget-->
-
-                    <div class="sidebar-widget animate-box">
-                        <div class="widget-title-cover"><h4 class="widget-title"><span>Search</span></h4></div>
-                        <form action="index.html#" class="search-form" method="get" role="search">
-                            <label>
-                                <input type="search" name="s" value="" placeholder="Search …" class="search-field">
-                            </label>
-                                <input type="submit" value="Search" class="search-submit">
-                        </form>
-                    </div> <!--.sidebar-widget-->
-
-                    <div class="sidebar-widget animate-box">
-                        <div class="widget-title-cover"><h4 class="widget-title"><span>Trending</span></h4></div>
-                        <div class="latest_style_2">
-                            <div class="latest_style_2_item_first">
-                                <figure class="alith_post_thumb_big">
-                                    <span class="post_meta_categories_label">Legal, Blog</span>
-                                    <a href="single.html"><img src="{% static 'images/thumb-large.jpg' %}" alt=""/></a>
-                                </figure>
-                                <h3 class="alith_post_title">
-                                    <a href="single.html"><strong>Nor again is there anyone who loves or pursues or desires to obtain</strong></a>
-                                </h3>
-                            </div>
-                            <div class="latest_style_2_item">
-                                <figure class="alith_news_img"><a href="single.html"><img src="{% static 'images/thumb-square-1.png' %}" alt=""/></a></figure>
-                                <h3 class="alith_post_title"><a href="single.html">Magna aliqua ut enim ad minim veniam</a></h3>
-                                <div class="post_meta">
-                                    <span class="meta_date">18 Sep, 2018</span>
-                                </div>
-                            </div>
-                            <div class="latest_style_2_item">
-                                <figure class="alith_news_img"><a href="single.html"><img src="{% static 'images/thumb-square-2.png' %}" alt=""/></a></figure>
-                                <h3 class="alith_post_title"><a href="single.html">Magna aliqua ut enim ad minim veniam</a></h3>
-                                <div class="post_meta">
-                                    <span class="meta_date">18 Sep, 2018</span>
-                                </div>
-                            </div>
-                            <div class="latest_style_2_item">
-                                <figure class="alith_news_img"><a href="single.html"><img src="{% static 'images/thumb-square-3.png' %}" alt=""/></a></figure>
-                                <h3 class="alith_post_title"><a href="single.html">Magna aliqua ut enim ad minim veniam</a></h3>
-                                <div class="post_meta">
-                                    <span class="meta_date">18 Sep, 2018</span>
-                                </div>
-                            </div>
-                        </div>
-                    </div> <!--.sidebar-widget-->
-
-                    <div class="sidebar-widget animate-box">
-                        <div class="widget-title-cover"><h4 class="widget-title"><span>Tags cloud</span></h4></div>
-                        <div class="alith_tags_all">
-                            <a href="index.html#" class="alith_tagg">Business</a>
-                            <a href="index.html#" class="alith_tagg">Technology</a>
-                            <a href="index.html#" class="alith_tagg">Sport</a>
-                            <a href="index.html#" class="alith_tagg">Art</a>
-                            <a href="index.html#" class="alith_tagg">Lifestyle</a>
-                            <a href="index.html#" class="alith_tagg">Three</a>
-                            <a href="index.html#" class="alith_tagg">Photography</a>
-                            <a href="index.html#" class="alith_tagg">Lifestyle</a>
-                            <a href="index.html#" class="alith_tagg">Art</a>
-                            <a href="index.html#" class="alith_tagg">Education</a>
-                            <a href="index.html#" class="alith_tagg">Social</a>
-                            <a href="index.html#" class="alith_tagg">Three</a>
-                        </div>
-                    </div> <!--.sidebar-widget-->
-
-                </aside>
+                {% include 'sidebar.html' %}
                 <!--End Sidebar-->
             </div>
             </div> <!--.primary-->
 
         </div>
     </div>
-    <div class="container-fluid">
-        <div class="container animate-box">
-            <div class="bottom margin-15">
-                <div class="row">
-                    <div class="col-xs-12 col-sm-6 col-md-6 col-lg-3">
-                        <div class="sidebar-widget">
-                        <div class="widget-title-cover"><h4 class="widget-title"><span>Most comments</span></h4></div>
-                        <div class="latest_style_3">
-                            <div class="latest_style_3_item">
-                              <span class="item-count vertical-align">1.</span>
-                                <div class="alith_post_title_small">
-                                    <a href="single.html"><strong>Frtuitous spluttered unlike ouch vivid blinked far inside</strong></a>
-                                </div>
-                            </div>
-                            <div class="latest_style_3_item">
-                              <span class="item-count vertical-align">2.</span>
-                                <div class="alith_post_title_small">
-                                    <a href="single.html"><strong>Against and lantern where a and gnashed nefarious</strong></a>
-                                </div>
-                            </div>
-                            <div class="latest_style_3_item">
-                              <span class="item-count vertical-align">3.</span>
-                                <div class="alith_post_title_small">
-                                    <a href="single.html"><strong>Ouch oh alas crud unnecessary invaluable some</strong></a>
-                                </div>
-                            </div>
-                            <div class="latest_style_3_item">
-                              <span class="item-count vertical-align">4.</span>
-                                <div class="alith_post_title_small">
-                                    <a href="single.html"><strong>And far hey much hello and bashful one save less</strong></a>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    </div>
-                    <div class="col-xs-12 col-sm-6 col-md-6 col-lg-3">
-                        <div class="sidebar-widget">
-                            <div class="widget-title-cover"><h4 class="widget-title"><span>Latest</span></h4></div>
-                            <div class="latest_style_2">
-                                <div class="latest_style_2_item">
-                                    <figure class="alith_news_img"><a href="single.html"><img alt="" src="{% static 'images/thumb-square-1.png' %}" class="hover_grey"></a></figure>
-                                    <h3 class="alith_post_title"><a href="single.html">Magna aliqua ut enim ad minim veniam</a></h3>
-                                </div>
-                                <div class="latest_style_2_item">
-                                    <figure class="alith_news_img"><a href="single.html"><img alt="" src="{% static 'images/thumb-square-2.png' %}" class="hover_grey"></a></figure>
-                                    <h3 class="alith_post_title"><a href="single.html">Magna aliqua ut enim ad minim veniam quis </a></h3>
-                                </div>
-                                <div class="latest_style_2_item">
-                                    <figure class="alith_news_img"><a href="single.html"><img alt="" src="{% static 'images/thumb-square-3.png' %}" class="hover_grey"></a></figure>
-                                    <h3 class="alith_post_title"><a href="single.html">Magna aliqua ut enim ad minim veniam quis </a></h3>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-xs-12 col-sm-6 col-md-6 col-lg-3">
-                        <div class="sidebar-widget">
-                            <div class="widget-title-cover"><h4 class="widget-title"><span>Categories</span></h4></div>
-                            <ul class="bottom_menu">
-                                <li><a href="index.html#" class=""><i class="fa fa-angle-right"></i>&nbsp;&nbsp; Business</a></li>
-                                <li><a href="index.html#" class=""><i class="fa fa-angle-right"></i>&nbsp;&nbsp; Entertainment</a></li>
-                                <li><a href="index.html#" class=""><i class="fa fa-angle-right"></i>&nbsp;&nbsp; Environment</a></li>
-                                <li><a href="index.html#" class=""><i class="fa fa-angle-right"></i>&nbsp;&nbsp; Health</a></li>
-                                <li><a href="index.html#" class=""><i class="fa fa-angle-right"></i>&nbsp;&nbsp; Life style</a></li>
-                                <li><a href="index.html#" class=""><i class="fa fa-angle-right"></i>&nbsp;&nbsp; Politics</a></li>
-                                <li><a href="index.html#" class=""><i class="fa fa-angle-right"></i>&nbsp;&nbsp; Technology</a></li>
-                                <li><a href="index.html#" class=""><i class="fa fa-angle-right"></i>&nbsp;&nbsp; World</a></li>
-                            </ul>
-                        </div>
-                    </div>
-                    <div class="col-xs-12 col-sm-6 col-md-6 col-lg-3">
-                        <div class="sidebar-widget">
-                            <div class="widget-title-cover"><h4 class="widget-title"><span>Instagram</span></h4></div>
-                            <ul class="alith-instagram-grid-widget alith-clr alith-row alith-gap-10">
-                                <li class="wow fadeInUp alith-col-nr alith-clr alith-col-3 animated">
-                                    <a class="" target="_blank" href="index.html#">
-                                        <img class="" title="" alt="" src="{% static 'images/thumb-square-1.png' %}">
-                                    </a>
-                                </li>
-                                <li class="wow fadeInUp alith-col-nr alith-clr alith-col-3 animated">
-                                    <a class="" target="_blank" href="index.html#">
-                                        <img class="" title="" alt="" src="{% static 'images/thumb-square-2.png' %}">
-                                    </a>
-                                </li>
-                                <li class="wow fadeInUp alith-col-nr alith-clr alith-col-3 animated">
-                                    <a class="" target="_blank" href="index.html#">
-                                        <img class="" title="" alt="" src="{% static 'images/thumb-square-3.png' %}">
-                                    </a>
-                                </li>
-                                <li class="wow fadeInUp alith-col-nr alith-clr alith-col-3 animated">
-                                    <a class="" target="_blank" href="index.html#">
-                                        <img class="" title="" alt="" src="{% static 'images/thumb-square-4.png' %}">
-                                    </a>
-                                </li>
-                                <li class="wow fadeInUp alith-col-nr alith-clr alith-col-3 animated">
-                                    <a class="" target="_blank" href="index.html#">
-                                        <img class="" title="" alt="" src="{% static 'images/thumb-square-5.png' %}">
-                                    </a>
-                                </li>
-                                <li class="wow fadeInUp alith-col-nr alith-clr alith-col-3 animated">
-                                    <a class="" target="_blank" href="index.html#">
-                                        <img class="" title="" alt="" src="{% static 'images/thumb-square-1.png' %}">
-                                    </a>
-                                </li>
-                                <li class="wow fadeInUp alith-col-nr alith-clr alith-col-3 animated">
-                                    <a class="" target="_blank" href="index.html#">
-                                        <img class="" title="" alt="" src="{% static 'images/thumb-square-2.png' %}">
-                                    </a>
-                                </li>
-                                <li class="wow fadeInUp alith-col-nr alith-clr alith-col-3 animated">
-                                    <a class="" target="_blank" href="index.html#">
-                                        <img class="" title="" alt="" src="{% static 'images/thumb-square-3.png' %}">
-                                    </a>
-                                </li>
-                                <li class="wow fadeInUp alith-col-nr alith-clr alith-col-3 animated">
-                                    <a class="" target="_blank" href="index.html#">
-                                        <img class="" title="" alt="" src="{% static 'images/thumb-square-4.png' %}">
-                                    </a>
-                                </li>
-                            </ul>
-                        </div>
-                    </div>
-                </div> <!--.row-->
-            </div>
-        </div>
-    </div>
+
     {% include 'footer.html' %}
 </div> <!--page-content-wrapper-->
 {% endblock main %}

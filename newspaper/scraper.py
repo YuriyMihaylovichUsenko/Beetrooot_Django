@@ -2,13 +2,13 @@ from concurrent.futures import ThreadPoolExecutor
 from queue import Queue
 from requests import Session
 from bs4 import BeautifulSoup
-from newspaper.models import Article, Image, Tag
+from newspaper.models import Article, Image, Tag, Category
 from django.utils.text import slugify
 import transliterate
 
 
-def create_urls_list(link):
-    print('create_urls_list')
+def create_category_urls(link):
+    print('create_category_urls')
     with Session() as session:
         print('Session')
         response = session.get(link)
@@ -17,16 +17,33 @@ def create_urls_list(link):
 
     soup = BeautifulSoup(response.content, 'html.parser')
     # breakpoint()
-    # print(soup)
+
+    return [
+        {'url': f"https://www.ukrinform.ua{i.get('href')}/block-lastnews",
+         'category_name': i.text.strip()}
+        for i in soup.select('.leftMenu a')
+    ]
+
+
+def create_article_urls(link):
+    print('create_article_urls')
+    with Session() as session:
+        print('Session')
+        response = session.get(link)
+        # print(response)
+        assert response.status_code == 200, 'bad response'
+
+    soup = BeautifulSoup(response.content, 'html.parser')
+    # breakpoint()
+
     return (
         f"https://www.ukrinform.ua{i.get('href')}"
-        for i in soup.select('article h2 a')
+        for i in soup.select('article h2 a') if not i.get('href').startswith('https://')
     )
-
 
 def worker(queue: Queue):
     while True:
-        url = queue.get()
+        url, category_name = queue.get()
         print('scraping go on', url)
         try:
             with Session() as s:
@@ -35,13 +52,13 @@ def worker(queue: Queue):
         except Exception as error:
             print('ERROR', error)
         # with Lock():
-        process(response, url)
+        process(response, url, category_name)
 
         if queue.empty():
             break
 
 
-def process(resp, url):
+def process(resp, url, category_name):
     try:
         soup = BeautifulSoup(resp.text, 'html.parser')
         # breakpoint()
@@ -49,25 +66,40 @@ def process(resp, url):
 
         # breakpoint()
         name = soup.select("h1")[0].text.strip()
-        text = soup.select(".newsText")[0].text.strip()
+        description = soup.select('.newsHeading')[0].text.strip()
+        text = soup.select(".newsText p")
+        text = ''.join([f'<p>{item.text.strip()}</p>' for item in text])
+        # breakpoint()
         tags = [i.text.strip() for i in soup.select(".tags a")]
+        date = soup.select(".newsDate")[0].text.strip()
 
-
-
+        date = '-'.join(date.split()[0].split('.')[::-1]) + ' ' + date.split()[1]
+        # breakpoint()
+        category, _ = Category.objects.get_or_create(
+            name=category_name,
+            slug=f"{url.split('/')[-2]}"
+        )
 
         article, _ = Article.objects.get_or_create(
-            slug=transliterate.translit(name, reversed=True).
-            replace(' ', '-').replace('є', 'ye').replace('ї', 'yi'),
+            slug=slugify(transliterate.translit(name,reversed=True).
+                    lower().replace(' ','-').
+                    replace('є', 'ye').replace('ї', 'yi').replace('і', 'i')),
             defaults={
                 'base_url': url,
                 'title': name,
                 'text': text,
+                'category': category,
+                'date_news': date,
+                'description': description
             }
         )
 
         for tag in tags:
+            slug = slugify(transliterate.translit(tag,reversed=True).
+                    lower().replace(' ','-').
+                    replace('є', 'ye').replace('ї', 'yi').replace('і', 'i'))
             t, _ = Tag.objects.get_or_create(
-                slug=tag,
+                slug=f"tag-{slug}",
                 defaults={'name': tag}
             )
             article.tags.add(t)
@@ -90,27 +122,30 @@ def process(resp, url):
 
 
 def main():
-    url = 'https://www.ukrinform.ua/rubric-culture/block-lastnews'
+    url = 'https://www.ukrinform.ua'
+    # url = 'https://www.ukrinform.ua/rubric-culture/block-lastnews'
     # url = 'https://www.telegraf.in.ua/topviews.html'
     # url = 'https://tsn.ua/news'
+    category_urls = create_category_urls(url)
+    # for dict_ in category_urls[:1]:
+    for dict_ in category_urls:
 
-    urls_list = create_urls_list(url)
-    print(urls_list)
+        article_urls = create_article_urls(dict_['url'])
+     
+        worker_numb = 5
+        # worker_numb = 1
 
-    worker_numb = 5
-    # worker_numb = 1
-
-    queue = Queue()
+        queue = Queue()
 
 
-    for url in list(urls_list):
-    # for url in list(urls_list)[:1]:
-        queue.put(url)
-    # print(queue.qsize())
+        for url in list(article_urls)[:10]:
+        # for url in list(article_urls)[:1]:
+            queue.put((url, dict_['category_name']))
 
-    with ThreadPoolExecutor(max_workers=worker_numb) as tpe:
-        for _ in range(worker_numb):
-            tpe.submit(worker, queue)
+
+        with ThreadPoolExecutor(max_workers=worker_numb) as tpe:
+            for _ in range(worker_numb):
+                tpe.submit(worker, queue)
 
 
 if __name__ == '__main__':

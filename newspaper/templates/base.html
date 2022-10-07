@@ -50,11 +50,11 @@
     <link href="{% static 'css/popup.css' %}" rel="stylesheet">
      <script src="{% static 'js/jquery.min.js' %}"></script>
     <script src="{% static 'js/jquery.bpopup.min.js' %}"></script>
-    <script>
-    $( document ).ready(function() {
-        $('#popup_this').bPopup();
-    });
-    </script>
+{#    <script>#}
+{#    $( document ).ready(function() {#}
+{#        $('#popup_this').bPopup();#}
+{#    });#}
+{#    </script>#}
 </head>
 <body>
 	<div class="spinner-cover">
@@ -166,12 +166,12 @@
         {% block main %} {% endblock main %}
 
 		 <!-- ads popup -->
-        <div id="popup_this">
-            <span class="button b-close">
-                <span>X</span>
-            </span>
-            <a href="https://alithemes.com/downloads/hewo-wordpress" target="_blank"><img src="{% static 'images/wp-version.png' %}" alt="ads"></a>
-        </div>
+{#        <div id="popup_this">#}
+{#            <span class="button b-close">#}
+{#                <span>X</span>#}
+{#            </span>#}
+{#            <a href="https://alithemes.com/downloads/hewo-wordpress" target="_blank"><img src="{% static 'images/wp-version.png' %}" alt="ads"></a>#}
+{#        </div>#}
 
 		<script src="{% static 'js/owl.carousel.min.js' %}"></script>
 		<script src="{% static 'js/jquery.waypoints.min.js' %}"></script>

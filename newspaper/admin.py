@@ -1,7 +1,7 @@
 from django.contrib import admin
 from django_summernote.admin import SummernoteModelAdmin
 from django.utils.html import format_html
-from . models import Image, Article, Tag
+from . models import Image, Article, Tag, Category
 
 
 class ImageInlineAdmin(admin.TabularInline):
@@ -32,6 +32,7 @@ class ArticleAdmin(SummernoteModelAdmin):  # instead of ModelAdmin
                 'base_url',
                 ('title', 'slug'),
                 ('text',),
+                ('category', 'date_news', ),
                 ('tags', )
             )
         }),
@@ -61,3 +62,4 @@ class TagAdmin(admin.ModelAdmin):
 admin.site.register(Image, ImageAdmin)
 admin.site.register(Article, ArticleAdmin)
 admin.site.register(Tag, TagAdmin)
+admin.site.register(Category)

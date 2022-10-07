@@ -24,13 +24,25 @@ class Tag(models.Model):
     def __str__(self):
         return self.name
 
+class Category(models.Model):
+    name = models.CharField(max_length=50)
+    slug = models.SlugField(unique=True, null=True)
+
+    class Meta:
+        verbose_name_plural = 'Categories'
+    def __str__(self):
+        return self.name
+
 
 class Article(models.Model):
     base_url = models.URLField()
     title = models.CharField(max_length=500)
     slug = models.SlugField(max_length=500, unique=True)
+    description = models.TextField(default='')
     text = models.TextField(default='')
     tags = models.ManyToManyField(Tag, related_name='article')
+    category = models.ForeignKey(Category, null=True, on_delete=models.SET_NULL)
+    date_news = models.DateTimeField(null=True)
 
     def __str__(self):
         return self.title
