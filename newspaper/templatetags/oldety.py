@@ -8,3 +8,6 @@ register = template.Library()
 def oldety_func(value):
     return datetime.datetime.now() - value
 
+@register.filter
+def my_upper(value: str):
+    return value.upper()

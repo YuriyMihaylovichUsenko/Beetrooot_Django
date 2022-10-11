@@ -1,10 +1,10 @@
 from django.urls import path
 
-from . views import index, category, single, tags
+from . import views
 
 urlpatterns = [
-    path('', index, name='index'),
-    path('category/<slug:slug>/', category, name='category'),
-    path('tags/<slug:slug>/', tags, name='tags'),
-    path('single/<slug:slug>/', single, name='single'),
+    path('', views.IndexView.as_view(), name='index'),
+    path('category/<slug:slug>/', views.category, name='category'),
+    path('tags/<slug:slug>/', views.tags, name='tags'),
+    path('single/<slug:slug>/', views.SingleView.as_view(), name='single'),
 ]

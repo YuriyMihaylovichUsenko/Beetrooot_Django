@@ -36,7 +36,7 @@
                                 <h3 class="alith_post_title"><a href="{% url 'single' article.slug %}">{{ article.title }}</a></h3>
                                 <div class="post_meta">
                                     <span class="meta_date">{% oldety_func article.date_news %}</span>
-                                    <span class="meta_date">{{ article.date_news }}</span>
+                                    <span class="meta_date">{{ article.date_news|date:'Y-m-d H:i' }}</span>
                                 </div>
                                 <p class="alith_post_except">{{ article.description }}</p>
                                 <div class="line-space"></div>

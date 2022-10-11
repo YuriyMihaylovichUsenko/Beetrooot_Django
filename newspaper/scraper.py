@@ -1,5 +1,7 @@
 from concurrent.futures import ThreadPoolExecutor
 from queue import Queue
+
+from django.db.transaction import atomic
 from requests import Session
 from bs4 import BeautifulSoup
 from newspaper.models import Article, Image, Tag, Category
@@ -58,6 +60,7 @@ def worker(queue: Queue):
             break
 
 
+@atomic
 def process(resp, url, category_name):
     try:
         soup = BeautifulSoup(resp.text, 'html.parser')

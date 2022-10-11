@@ -1,5 +1,6 @@
 {% extends 'base.html' %}
 {% load static %}
+{% load oldety %}
 {% block title %}Simple life in big city{% endblock %}
 {% block main %}
 
@@ -46,7 +47,7 @@
                                 <div class="post-tags">
                                     <div class="post-tags-inner">
                                         {% for tag in article.tags.all %}
-                                        <a rel="tag" href="category-grid.html">{{ tag|upper }}</a>
+                                        <a rel="tag" href="category-grid.html">{{ tag.name|my_upper }}</a>
                                         {% endfor %}
                                     </div>
                                 </div>
@@ -99,17 +100,18 @@
                                         <div class="col-md-6">
                                             <div class="post-navigation">
                                                 <div class="latest_style_2">
-                                                <h5><span>Preview Post</span></h5>
+                                                    <h5><span>Related Posts</span></h5>
+                                                    {% for article in random_articles_4 %}
                                                 <div class="latest_style_2_item">
-                                                    <figure class="alith_news_img"><a href="single.html"><img class="hover_grey" src="{% static 'images/thumb-square-1.png' %}" alt=""></a></figure>
-                                                    <h3 class="alith_post_title"><a href="single.html">Magna aliqua ut enim ad minim veniam</a></h3>
+                                                    <figure class="alith_news_img"><a href="{% url 'single' article.slug %}"><img class="hover_grey" src="{{ article.images.first.image.url }}" alt=""></a></figure>
+                                                    <h3 class="alith_post_title"><a href="single.html">{{ article.title }}</a></h3>
                                                 </div>
-
-                                                <h5><span>Next Post</span></h5>
-                                                <div class="latest_style_2_item">
-                                                    <figure class="alith_news_img"><a href="single.html"><img class="hover_grey" src="{% static 'images/thumb-square-1.png' %}" alt=""></a></figure>
-                                                    <h3 class="alith_post_title"><a href="single.html">Magna aliqua ut enim ad minim veniam</a></h3>
-                                                </div>
+                                                    {% endfor %}
+{#                                                <h5><span>Next Post</span></h5>#}
+{#                                                <div class="latest_style_2_item">#}
+{#                                                    <figure class="alith_news_img"><a href="single.html"><img class="hover_grey" src="{% static 'images/thumb-square-1.png' %}" alt=""></a></figure>#}
+{#                                                    <h3 class="alith_post_title"><a href="single.html">Magna aliqua ut enim ad minim veniam</a></h3>#}
+{#                                                </div>#}
                                                 </div>
                                             </div>
                                         </div>
@@ -212,14 +214,16 @@
                         <h4><span>You might be interested in</span></h4>
                         <span class="single-more-articles-close-button"><i class="fa fa-times" aria-hidden="true"></i></span>
                         <div class="latest_style_2">
+                            {% for article in random_articles_2 %}
                             <div class="latest_style_2_item">
-                                <figure class="alith_news_img"><a href="single.html"><img class="hover_grey" src="{% static 'images/thumb-square-1.png' %}" alt=""></a></figure>
-                                <h3 class="alith_post_title"><a href="single.html">Magna aliqua ut enim ad minim veniam</a></h3>
+                                <figure class="alith_news_img"><a href="{% url 'single' article.slug %}"><img class="hover_grey" src="{{ article.images.first.image.url }}" alt=""></a></figure>
+                                <h3 class="alith_post_title"><a href="single.html">{{ article.title }}</a></h3>
                             </div>
-                            <div class="latest_style_2_item">
-                                <figure class="alith_news_img"><a href="single.html"><img class="hover_grey" src="{% static 'images/thumb-square-2.png' %}" alt=""></a></figure>
-                                <h3 class="alith_post_title"><a href="single.html">Magna aliqua ut enim ad minim veniam</a></h3>
-                            </div>
+                                {% endfor %}
+{#                            <div class="latest_style_2_item">#}
+{#                                <figure class="alith_news_img"><a href="single.html"><img class="hover_grey" src="{% static 'images/thumb-square-2.png' %}" alt=""></a></figure>#}
+{#                                <h3 class="alith_post_title"><a href="single.html">Magna aliqua ut enim ad minim veniam</a></h3>#}
+{#                            </div>#}
                         </div>
                     </div> <!--end single more articles-->
                 </div>
