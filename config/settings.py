@@ -42,6 +42,7 @@ INSTALLED_APPS = [
 
     "debug_toolbar",
     'django_summernote',
+    'widget_tweaks',
 
     'newspaper',
 ]
@@ -70,7 +71,9 @@ TEMPLATES = [
                 'django.template.context_processors.request',
                 'django.contrib.auth.context_processors.auth',
                 'django.contrib.messages.context_processors.messages',
-                'newspaper.context_processor.category_all'
+                'newspaper.context_processor.category_all',
+                'newspaper.context_processor.tags',
+                'newspaper.context_processor.latest_article',
             ],
             'libraries':{
                 'oldety': 'newspaper.templatetags.oldety',

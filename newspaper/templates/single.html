@@ -1,6 +1,7 @@
 {% extends 'base.html' %}
 {% load static %}
 {% load oldety %}
+{% load widget_tweaks %}
 {% block title %}Simple life in big city{% endblock %}
 {% block main %}
 
@@ -193,15 +194,28 @@
                                         </nav> <!--comment nav-->
                                         <div class="comment-respond" id="respond">
                                            <h3 class="comment-reply-title" id="reply-title">Leave a Reply <small><a href="single.html#respond" id="cancel-comment-reply-link" rel="nofollow"><i class="fa fa-times"></i></a></small></h3>
-                                           <form novalidate="" class="comment-form" id="commentform" method="post" action="single.html">
+                                           <form novalidate="" class="comment-form" id="commentform" method="post" >
+                                               {% csrf_token %}
                                               <p class="comment-notes"><span id="email-notes">Your email address will not be published.</span></p>
                                               <div class="row">
-                                                 <div class="comment-form-author col-sm-12 col-md-6"> <label for="author">Name (optional)</label> <input type="text" size="30" value="" placeholder="Your name *" name="author" id="author"></div>
-                                                 <div class="comment-form-email col-sm-12 col-md-6"> <label for="email">Email (optional)</label> <input type="email" size="30" value="" placeholder="Email *" name="email" id="email"></div>
-                                              </div>
-                                              <p class="comment-form-comment"><label for="comment">Comment</label><textarea aria-required="true" placeholder="Your Comment" rows="8" cols="45" name="comment" id="comment"></textarea></p>
 
-                                              <p class="form-submit"><input type="submit" value="Post Comment" class="submit" id="submit" name="submit"> <input type="hidden" id="comment_post_ID" value="80" name="comment_post_ID"> <input type="hidden" value="0" id="comment_parent" name="comment_parent"></p>
+                                                 <div class="comment-form-author col-sm-12 col-md-6"> <label for="author">Name (optional)</label>
+                                                     {% render_field form.name type="text" class="form-control" placeholder="Your Name" minlength="2" maxlength="50" id="contact-name" %}
+{#                                                     <input type="text" size="30" value="" placeholder="Your name *" name="author" id="author" maxlength="50">#}
+                                                 </div>
+                                                 <div class="comment-form-email col-sm-12 col-md-6"> <label for="email">Email (optional)</label>
+                                                     {% render_field form.email type="email" class="form-control" placeholder="Your E-mail" id="contact-email" %}
+{#                                                     <input type="email" size="30" value="" placeholder="Email *" name="email" id="email" maxlength="50">#}
+                                                 </div>
+                                              </div>
+                                              <p class="comment-form-comment"><label for="comment">Comment</label>
+{#                                                  <textarea aria-required="true" placeholder="Your Comment" rows="8" cols="45" name="comment" id="comment"></textarea>#}
+                                                    {% render_field form.comment class="form-control" placeholder="Your Message" maxlength="1000" id="comment" %}</p>
+                                              <p class="form-submit">
+                                                  <input type="submit" value="Post Comment" class="submit" id="submit" name="submit">
+                                                  <input type="hidden" id="comment_post_ID" value="80" name="comment_post_ID">
+                                                  <input type="hidden" value="0" id="comment_parent" name="comment_parent" maxlength="1000">
+                                              </p>
                                            </form>
                                         </div> <!--comment form-->
 
@@ -217,7 +231,7 @@
                             {% for article in random_articles_2 %}
                             <div class="latest_style_2_item">
                                 <figure class="alith_news_img"><a href="{% url 'single' article.slug %}"><img class="hover_grey" src="{{ article.images.first.image.url }}" alt=""></a></figure>
-                                <h3 class="alith_post_title"><a href="single.html">{{ article.title }}</a></h3>
+                                <h3 class="alith_post_title"><a href="{% url 'single' article.slug %}">{{ article.title }}</a></h3>
                             </div>
                                 {% endfor %}
 {#                            <div class="latest_style_2_item">#}

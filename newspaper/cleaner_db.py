@@ -7,10 +7,13 @@ def main():
     Tag.objects.all().delete()
     Category.objects.all().delete()
 
-    dir_ = 'd:\python_projects\Beetroot_Django\media\images'
+    dir_ = 'd:\python_projects\Beetroot_Django\media\images\\articles'
     for f in os.listdir(dir_):
         os.remove(os.path.join(dir_, f))
 
+    dir_2 = 'd:\python_projects\Beetroot_Django\media\images\\authors'
+    for f in os.listdir(dir_):
+        os.remove(os.path.join(dir_2, f))
 
 if __name__ == '__main__':
     main()

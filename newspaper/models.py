@@ -24,6 +24,14 @@ class Tag(models.Model):
     def __str__(self):
         return self.name
 
+class Author(models.Model):
+    name = models.CharField(max_length=50)
+    foto = models.ImageField(upload_to='images.authors')
+
+
+    def __str__(self):
+        return self.name
+
 class Category(models.Model):
     name = models.CharField(max_length=50)
     slug = models.SlugField(unique=True, null=True)
@@ -43,6 +51,19 @@ class Article(models.Model):
     tags = models.ManyToManyField(Tag, related_name='article')
     category = models.ForeignKey(Category, null=True, on_delete=models.SET_NULL)
     date_news = models.DateTimeField(null=True)
+    author = models.ForeignKey(Author, null=True, on_delete=models.SET_NULL)
+    views = models.IntegerField(default=0)
+
 
     def __str__(self):
         return self.title
+
+
+class Comment(models.Model):
+    name = models.CharField(max_length=50)
+    email = models.EmailField(max_length=50)
+    comment = models.TextField(default='', max_length=1000)
+    article = models.ForeignKey(Article, on_delete=models.SET_NULL, null=True, related_name='comments')
+
+    def __str__(self):
+        return self.name

@@ -1,7 +1,7 @@
 {% extends 'base.html' %}
 {% load oldety %}
 {% load static %}
-{% block title %}{{ category.name }}{% endblock %}
+{% block title %}{{ articles.0.category.name }}{% endblock %}
 {% block main %}
 <div id="page-content-wrapper">
     {% include 'header.html' %}
@@ -9,7 +9,7 @@
         <div class="container animate-box">
             <div class="row">
                 <div class="archive-header">
-                    <div class="archive-title"><h2>{{ category.name }}</h2></div>
+                    <div class="archive-title"><h2>{{ articles.0.category.name }}</h2></div>
                     <div class="bread">
                         <ul class="breadcrumbs" id="breadcrumbs">
                            <li class="item-home"><a  class="bread-link bread-home">-КАТЕГОРІЯ-</a></li>
@@ -26,7 +26,7 @@
                 <div class="col-md-8">
                     <div class="post_list grid-blance">
                         <div class="row">
-                            {% for article in articles_some_category %}
+                            {% for article in articles %}
                             <article class="col-md-6 animate-box section_margin">
                                 <div class="wrap">
                                     <figure class="alith_news_img">
@@ -47,10 +47,9 @@
                     <div class="site-pagination animate-box">
                         <ul class="page-numbers">
                             <li><a href="category-grid.html#" class="prev page-numbers">PREV</a></li>
-                            <li><span class="page-numbers current" aria-current="page">1.</span></li>
-                            <li><a href="category-grid.html#" class="page-numbers">2.</a></li>
-                            <li><a href="category-grid.html#" class="page-numbers">3.</a></li>
-                            <li><a href="category-grid.html#" class="page-numbers">4.</a></li>
+                            {% for i in paginator.page_range %}
+                            <li><a href="{{request.path}}?page={{i}}" class="page-numbers">{{i}}.</a></li>
+                            {% endfor %}
                             <li><a href="category-grid.html#" class="next page-numbers">NEXT</a></li>
                         </ul>
                     </div>
