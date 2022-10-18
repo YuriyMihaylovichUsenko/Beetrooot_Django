@@ -45,6 +45,8 @@ INSTALLED_APPS = [
     'widget_tweaks',
 
     'newspaper',
+
+    'django_cleanup.apps.CleanupConfig',
 ]
 
 MIDDLEWARE = [
@@ -74,6 +76,8 @@ TEMPLATES = [
                 'newspaper.context_processor.category_all',
                 'newspaper.context_processor.tags',
                 'newspaper.context_processor.latest_article',
+                'newspaper.context_processor.datetime_now',
+                'newspaper.context_processor.mostly_authors',
             ],
             'libraries':{
                 'oldety': 'newspaper.templatetags.oldety',
@@ -88,22 +92,22 @@ WSGI_APPLICATION = 'config.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/4.1/ref/settings/#databases
 
-DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': 'mydatabase',
-    }
-}
 # DATABASES = {
 #     'default': {
-#         'ENGINE': 'django.db.backends.postgresql',
-#         'NAME': config('POSTGRES_DB'),
-#         'USER': config('POSTGRES_USER'),
-#         'PASSWORD': config('POSTGRES_PASSWORD'),
-#         'HOST': config('HOST'),
-#         'PORT': config('PORT'),
+#         'ENGINE': 'django.db.backends.sqlite3',
+#         'NAME': 'mydatabase2',
 #     }
 # }
+DATABASES = {
+    'default': {
+        'ENGINE': 'django.db.backends.postgresql',
+        'NAME': config('POSTGRES_DB'),
+        'USER': config('POSTGRES_USER'),
+        'PASSWORD': config('POSTGRES_PASSWORD'),
+        'HOST': config('HOST'),
+        'PORT': config('PORT'),
+    }
+}
 
 # Password validation
 # https://docs.djangoproject.com/en/4.1/ref/settings/#auth-password-validators
@@ -160,3 +164,34 @@ INTERNAL_IPS = [
 ]
 
 DATETIME_FORMAT = '%Y-%m-%d %H:%M'
+
+LOGGING = {
+    'version': 1,
+    'disable_existing_loggers': False,
+    'formatters': {
+        'verbose': {
+            'format': '[{asctime}] {levelname} {module} {thread:d} {lineno} {message}',
+            'style': '{',
+        },
+        'simple': {
+            'format': '%(levelname)s %(message)s'
+        },
+    },
+    'handlers': {
+        'logit': {
+            'level': 'DEBUG',
+            'class': 'logging.handlers.RotatingFileHandler',
+            'filename': 'loggs/logit.log',
+            'maxBytes': 15728640,
+            'backupCount': 2,
+            'formatter': 'verbose',
+        },
+    },
+    'loggers': {
+        'logit': {
+            'handlers': ['logit'],
+            'level': 'DEBUG',
+            'propagate': True,
+        },
+    },
+}

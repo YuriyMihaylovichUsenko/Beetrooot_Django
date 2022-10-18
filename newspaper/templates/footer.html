@@ -52,7 +52,7 @@
                             <div class="widget-title-cover"><h4 class="widget-title"><span>Categories</span></h4></div>
                             <ul class="bottom_menu">
                                 {% for category in categories %}
-                                <li><a href="{% url 'category' category.slug %}" class=""><i class="fa fa-angle-right"></i>&nbsp;&nbsp;{{ category.name }}</a></li>
+                                <li><a href="{% url 'all_articles' %}?category={{ category.name }}" class=""><i class="fa fa-angle-right"></i>&nbsp;&nbsp;{{ category.name }}</a></li>
                                 {% endfor %}
                             </ul>
                         </div>

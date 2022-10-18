@@ -171,7 +171,7 @@ def main():
 
         article_urls = create_article_urls(dict_['url'])
 
-        worker_numb = 3
+        worker_numb = 10
         # worker_numb = 1
 
         queue = Queue()

@@ -96,7 +96,7 @@
         <div class="widget-title-cover"><h4 class="widget-title"><span>Теги</span></h4></div>
         <div class="alith_tags_all">
             {% for tag in tags %}
-            <a href="{% url 'tags' tag.slug %}" class="alith_tagg">{{ tag }}</a>
+            <a href="{% url 'all_articles' %}?tag={{ tag.name }}" class="alith_tagg">{{ tag }}</a>
             {% endfor %}
         </div>
     </div> <!--.sidebar-widget-->

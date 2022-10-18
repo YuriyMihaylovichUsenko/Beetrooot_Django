@@ -169,7 +169,7 @@
                                 <div class="post_meta">
                                     <a href="javascript:void(0)" class="meta_author_avatar"><img src={{ article.author.foto.url }} alt="{{ article.author.name }}"/></a>
                                     <span class="meta_author_name"><a href="javascript:void(0)" class="author">{{ article.author.name }}</a></span>
-                                    <span class="meta_categories"><a href="{% url 'category' article.category.slug %}">{{ article.category }}</a></span>
+                                    <span class="meta_categories"><a href="{% url 'all_articles' %}?category={{ article.category.name }}">{{ article.category }}</a></span>
                                     <span class="meta_date">{{ article.date_news|date:'Y-m-d H:i' }}</span>
                                 </div>
                             </div>

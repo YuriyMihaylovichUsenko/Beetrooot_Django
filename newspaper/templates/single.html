@@ -191,7 +191,22 @@
                                         <nav role="navigation" class="comment-navigation clr">
                                            <div class="nav-previous span_1_of_2 col col-1"></div>
                                            <div class="nav-next span_1_of_2 col"> <a href="single.html#comments">Newer Comments →</a></div>
-                                        </nav> <!--comment nav-->
+                                        </nav>
+                                            {% if messages %}
+                                            {% for message in messages %}
+                                            {% if message.tags == 'success' %}
+                                            <div class="alert alert-primary" role="alert">
+                                                <p class="w-100 text-justify text-center">{{ message }}</p>
+                                            </div>
+                                            {% else %}
+                                            <div class="alert alert-danger" role="alert">
+                                                <p class="w-100 text-justify text-center">{{ message }}</p>
+                                            </div>
+                                            {% endif %}
+
+                                            {% endfor %}
+                                            {% endif %}
+                                       <!--comment nav-->
                                         <div class="comment-respond" id="respond">
                                            <h3 class="comment-reply-title" id="reply-title">Leave a Reply <small><a href="single.html#respond" id="cancel-comment-reply-link" rel="nofollow"><i class="fa fa-times"></i></a></small></h3>
                                            <form novalidate="" class="comment-form" id="commentform" method="post" >

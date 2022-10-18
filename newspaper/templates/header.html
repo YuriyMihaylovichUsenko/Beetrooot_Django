@@ -4,7 +4,7 @@
             <div class="row">
                 <div class="col-md-6 col-sm-12 time">
                     <div class="off-canvas-toggle" id="off-canvas-toggle"><span></span><p class="sidebar-open">MORE</p></div>
-                    <i class="fa fa-clock-o"></i><span>&nbsp;&nbsp;&nbsp;Friday, 5 January 2018</span>
+                    <i class="fa fa-clock-o"></i><span>&nbsp;&nbsp;&nbsp;{{ datetime_now|date:'Y-m-d'  }}</span>
                 </div>
                 <div class="col-md-6 col-sm-12 social">
                     <ul>
@@ -58,21 +58,24 @@
                         <li class="menu-item-has-children"><a>Categories</a>
                             <ul class="sub-menu">
                                 {% for category in categories %}
-                                    <li><a href="{% url 'category' category.slug %}">{{ category.name }}</a></li>
+                                    <li><a href="{% url 'all_articles' %}?category={{ category.name }}">{{ category.name }}</a></li>
                                 {% endfor %}
                             </ul>
                         </li>
-                        <li><a href="javascript:void(0)">News</a></li>
-                        <li><a href="javascript:void(0)">Economy</a></li>
-                        <li class="menu-item-has-children"><a href="javascript:void(0)">Entertainment</a>
+                        <li><a href="{% url 'all_articles' %}">All News</a></li>
+                        <li class="menu-item-has-children"><a href="javascript:void(0)">Tags</a>
                             <ul class="sub-menu">
-                                <li><a href="javascript:void(0)">Festival</a></li>
-                                <li><a href="javascript:void(0)">Music</a></li>
-                                <li><a href="javascript:void(0)">Movie</a></li>
-                                <li><a href="javascript:void(0)">Cinema</a></li>
+                                {% for tag in tags %}
+                                <li><a href="{% url 'all_articles' %}?tag={{ tag.name }}">{{ tag }}</a></li>
+                                {% endfor %}
                             </ul>
                         </li>
-                        <li><a href="javascript:void(0)">Jobs</a></li>
+                        <li class="menu-item-has-children"><a href="javascript:void(0)">Authors</a>
+                            <ul class="sub-menu">
+                                {% for author in mostly_authors %}
+                                <li><a href="{% url 'all_articles' %}?author={{ author.name }}">{{ author.name }}</a></li>
+                                {% endfor %}
+                            </ul>
                     </ul>
                 </div>
             </div>

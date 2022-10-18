@@ -1,7 +1,8 @@
 from django.contrib import admin
 from django_summernote.admin import SummernoteModelAdmin
 from django.utils.html import format_html
-from . models import Image, Article, Tag, Category, Comment
+from . actions import translate_article
+from .models import Image, Article, Tag, Category, Comment, Author
 
 
 class ImageInlineAdmin(admin.TabularInline):
@@ -18,20 +19,22 @@ class ImageInlineAdmin(admin.TabularInline):
 
 
 class ArticleAdmin(SummernoteModelAdmin):  # instead of ModelAdmin
-    list_display = ('title', 'base_url', )
+    actions = [translate_article]
+    list_display = ('title', 'author', )
     inlines = (ImageInlineAdmin, )
-    summernote_fields = ('text', )
+    summernote_fields = ('text', 'text_en')
     prepopulated_fields = {'slug': ('title', )}
     search_fields = ('title', 'text')
     list_filter = ('tags',)
-    list_editable = ('base_url',)
+    # list_editable = ('base_url',)
 
     fieldsets = (
         (None, {
-            'fields': (
-                'base_url',
-                ('title', 'slug'),
+            'fields': (('author'),
+                ('base_url', 'slug',),
+                ('title', 'title_en'),
                 ('text',),
+                ('text_en',),
                 ('category', ),
                 ('tags', ),
                 ('date_news', )
@@ -59,9 +62,22 @@ class TagAdmin(admin.ModelAdmin):
         link = f'/admin/newspaper/article/?tags__id__exact={obj.id}'
         return format_html(f'<a href="{link}">{count} article</a>')
 
+class AuthorAdmin(admin.ModelAdmin):
+    list_display = ('name', 'count_article')
+    search_fields = ('name', )
+
+    def get_queryset(self, request):
+        queryset = super().get_queryset(request)
+        return queryset.prefetch_related('article')
+    @staticmethod
+    def count_article(obj):
+        count = obj.article.count()
+        link = f'/admin/newspaper/article/?author__id__exact={obj.id}'
+        return format_html(f'<a href="{link}">{count} article</a>')
 
 admin.site.register(Image, ImageAdmin)
 admin.site.register(Article, ArticleAdmin)
 admin.site.register(Tag, TagAdmin)
 admin.site.register(Category)
 admin.site.register(Comment)
+admin.site.register(Author, AuthorAdmin)

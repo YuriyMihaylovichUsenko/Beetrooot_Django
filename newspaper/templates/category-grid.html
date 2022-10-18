@@ -1,21 +1,12 @@
 {% extends 'base.html' %}
 {% load oldety %}
 {% load static %}
-{% block title %}{{ articles.0.category.name }}{% endblock %}
 {% block main %}
 <div id="page-content-wrapper">
     {% include 'header.html' %}
     <div class="container-fluid">
         <div class="container animate-box">
             <div class="row">
-                <div class="archive-header">
-                    <div class="archive-title"><h2>{{ articles.0.category.name }}</h2></div>
-                    <div class="bread">
-                        <ul class="breadcrumbs" id="breadcrumbs">
-                           <li class="item-home"><a  class="bread-link bread-home">-КАТЕГОРІЯ-</a></li>
-                        </ul>
-                    </div>
-                </div>
             </div>
         </div>
     </div>

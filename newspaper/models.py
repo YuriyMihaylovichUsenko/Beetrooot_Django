@@ -45,9 +45,12 @@ class Category(models.Model):
 class Article(models.Model):
     base_url = models.URLField()
     title = models.CharField(max_length=500)
+    title_en = models.CharField(max_length=500, null=True, default='')
     slug = models.SlugField(max_length=500, unique=True)
     description = models.TextField(default='')
+    description_en = models.TextField(default='', null=True)
     text = models.TextField(default='')
+    text_en = models.TextField(default='', null=True)
     tags = models.ManyToManyField(Tag, related_name='article')
     category = models.ForeignKey(Category, null=True, on_delete=models.SET_NULL)
     date_news = models.DateTimeField(null=True)
