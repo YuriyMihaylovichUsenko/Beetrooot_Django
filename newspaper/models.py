@@ -67,6 +67,7 @@ class Comment(models.Model):
     email = models.EmailField(max_length=50)
     comment = models.TextField(default='', max_length=1000)
     article = models.ForeignKey(Article, on_delete=models.SET_NULL, null=True, related_name='comments')
+    date_time = models.DateTimeField(null=True)
 
     def __str__(self):
         return self.name

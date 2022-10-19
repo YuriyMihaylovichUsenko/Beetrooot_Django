@@ -100,15 +100,19 @@ class SingleView(FormView, DetailView):
             'tags': tags_for_1_article_selector,
             'latest_article': latest_article_selector,
             'random_articles_4': random_articles_4,
-            'random_articles_2': random_articles_2
+            'random_articles_2': random_articles_2,
         }
 
         return context
 
 
     def form_valid(self, form):
-        data_for_writing = form.cleaned_data | {'article': self.get_object()}
+        data_for_writing = form.cleaned_data | {
+            'article': self.get_object(),
+            'date_time': datetime.now()
+        }
         Comment.objects.create(**data_for_writing)
+
         messages.add_message(
             self.request, messages.SUCCESS, 'Thank you for comment'
         )
@@ -118,7 +122,6 @@ class SingleView(FormView, DetailView):
         messages.add_message(
             self.request, messages.WARNING, 'Please input valid data'
         )
-        print(dir(messages))
         return super().form_invalid(form)
 
 class TagsViews(ListView):

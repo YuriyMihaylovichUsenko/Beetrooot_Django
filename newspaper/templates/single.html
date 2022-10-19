@@ -10,17 +10,7 @@
     <div class="container-fluid">
         <div class="container animate-box">
             <div class="row">
-                <div class="post-header">
-                    <div class="bread">
-                        <ul class="breadcrumbs" id="breadcrumbs">
-                           <li class="item-home">You are here: <a title="Home" href="index.html" class="bread-link bread-home">Home</a></li>
-                           <li class="separator separator-home"> /</li>
-                           <li class="item-current item-cat"><a title="Home" href="index.html" class="bread-link bread-home">Lifestyle</a></li>
-                            <li class="separator separator-home"> /</li>
-                            <li class="item-current item-cat"><strong class="bread-current bread-cat">Simple life in big city</strong></li>
-                        </ul>
-                    </div>
-                </div>
+
             </div>
         </div>
     </div>
@@ -35,9 +25,9 @@
                             <div class="single-header">
                                 <h3 class="alith_post_title">{{ article.title }}</h3>
                                 <div class="post_meta">
-                                    <span class="meta_author_name"><a class="author">Unknown author</a></span>
+                                    <span class="meta_author_name"><a class="author">{{ article.author.name }}</a></span>
                                     <span class="meta_categories"><a href="http://demos.alithemes.com/html/hewo/archive.html">{{ article.category }}</a></span>
-                                    <span class="meta_date">{{ article.date_news }}</span>
+                                    <span class="meta_date">{{ article.date_news|date:'Y-m-d H:i' }}</span>
                                 </div>
                             </div>
                             <div class="single-content animate-box">
@@ -53,67 +43,25 @@
                                     </div>
                                 </div>
 
-                                <div class="post-author section_margin_40">
-                                    <figure><a href="page-author.html"><img src="{% static 'images/post-author-avatar.jpg' %}"></a></figure>
-                                    <div class="post-author-info">
-                                        <h3><a href="page-author.html">Steven Jobs</a></h3>
-                                        <p>Ouch oh alas crud unnecessary invaluable some goodness opposite hello since audacious far barring and absurdly much boa</p>
-                                        <ul>
-                                            <li><a href="single.html"><i class="fa fa-facebook"></i></a></li>
-                                            <li><a href="single.html"><i class="fa fa-twitter"></i></a></li>
-                                            <li><a href="single.html"><i class="fa fa-google-plus"></i></a></li>
-                                        </ul>
-                                    </div>
-                                </div>
+
                                 <div class="post-related section_margin_40">
                                     <div class="row">
-                                        <div class="col-md-6">
-                                            <div class="sidebar-widget">
+
+
                                                 <div class="widget-title-cover"><h4 class="widget-title"><span>Related Posts</span></h4></div>
                                                 <div class="latest_style_3">
-                                                    <div class="latest_style_3_item">
-                                                      <span class="item-count vertical-align">1.</span>
-                                                        <div class="alith_post_title_small">
-                                                            <a href="single.html"><strong>Frtuitous spluttered unlike ouch vivid blinked far inside</strong></a>
-                                                        </div>
-                                                    </div>
-                                                    <div class="latest_style_3_item">
-                                                      <span class="item-count vertical-align">2.</span>
-                                                        <div class="alith_post_title_small">
-                                                            <a href="single.html"><strong>Against and lantern where a and gnashed nefarious</strong></a>
-                                                        </div>
-                                                    </div>
-                                                    <div class="latest_style_3_item">
-                                                      <span class="item-count vertical-align">3.</span>
-                                                        <div class="alith_post_title_small">
-                                                            <a href="single.html"><strong>Ouch oh alas crud unnecessary invaluable some</strong></a>
-                                                        </div>
-                                                    </div>
-                                                    <div class="latest_style_3_item">
-                                                      <span class="item-count vertical-align">4.</span>
-                                                        <div class="alith_post_title_small">
-                                                            <a href="single.html"><strong>And far hey much hello and bashful one save less</strong></a>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div> <!--post-related-->
-                                        <div class="col-md-6">
-                                            <div class="post-navigation">
-                                                <div class="latest_style_2">
-                                                    <h5><span>Related Posts</span></h5>
                                                     {% for article in random_articles_4 %}
-                                                <div class="latest_style_2_item">
+                                                    <div class="latest_style_2_item">
                                                     <figure class="alith_news_img"><a href="{% url 'single' article.slug %}"><img class="hover_grey" src="{{ article.images.first.image.url }}" alt=""></a></figure>
                                                     <h3 class="alith_post_title"><a href="single.html">{{ article.title }}</a></h3>
-                                                </div>
+                                                    </div>
                                                     {% endfor %}
-{#                                                <h5><span>Next Post</span></h5>#}
-{#                                                <div class="latest_style_2_item">#}
-{#                                                    <figure class="alith_news_img"><a href="single.html"><img class="hover_grey" src="{% static 'images/thumb-square-1.png' %}" alt=""></a></figure>#}
-{#                                                    <h3 class="alith_post_title"><a href="single.html">Magna aliqua ut enim ad minim veniam</a></h3>#}
-{#                                                </div>#}
                                                 </div>
+
+
+                                        <div class="col-md-6">
+                                            <div class="post-navigation">
+
                                             </div>
                                         </div>
                                     </div>
@@ -123,75 +71,23 @@
                                 <section id="comments">
                                    <h4 class="single-comment-title">Comments</h4>
                                    <div class="comments-inner clr">
-                                      <div class="comments-title"> <p>There are 3 comments for this article</p></div>
+                                      <div class="comments-title"> <p>There are {{ article.comments.all.count }} comments for this article</p></div>
                                         <ol class="commentlist">
-                                           <li id="li-comment-4">
-                                              <article class="comment even thread-even depth-1 clr" id="comment-4">
-                                                 <div class="comment-author vcard"> <img width="60" height="60" src="{% static 'images/post-author-avatar.jpg' %}" alt=""></div>
-                                                 <div class="comment-details clr ">
-                                                    <header class="comment-meta"> <strong class="fn"> Steven Jobs </strong> <span class="comment-date">July 4, 2017 7:25 am </span></header>
-                                                    <div class="comment-content entry clr">
-                                                       <p>dived wound factual legitimately delightful goodness fit rat some lopsidedly far when.</p>
-                                                    </div>
-                                                    <div class="reply comment-reply-link-div"> <a aria-label="Reply to spadmin" href="single.html#respond" class="comment-reply-link" rel="nofollow">Reply</a></div>
-                                                 </div>
-                                              </article>
-                                              <ul class="children">
-                                                 <li id="li-comment-6">
-                                                    <article class="comment odd alt depth-2 clr" id="comment-6">
-                                                       <div class="comment-author vcard"><img width="60" height="60" src="{% static 'images/post-author-avatar.jpg' %}" alt=""></div>
-                                                       <div class="comment-details clr ">
-                                                          <header class="comment-meta"> <strong class="fn"> Jim Calist </strong> <span class="comment-date">July 16, 2017 1:29 am </span></header>
-                                                          <div class="comment-content entry clr">
-                                                             <p>Slung alongside jeepers hypnotic legitimately some iguana this agreeably triumphant pointedly far</p>
-                                                          </div>
-                                                          <div class="reply comment-reply-link-div"><a aria-label="Reply to spadmin" href="single.html#respond" class="comment-reply-link" rel="nofollow">Reply</a></div>
-                                                       </div>
-                                                    </article>
-                                                 </li>
-                                              </ul>
-                                           </li>
+                                           {% for comment in article.comments.all %}
                                            <li id="li-comment-5">
                                               <article class="comment even thread-odd thread-alt depth-1 clr" id="comment-5">
-                                                 <div class="comment-author vcard"> <img width="60" height="60" src="{% static 'images/post-author-avatar.jpg' %}" alt=""></div>
                                                  <div class="comment-details clr ">
-                                                    <header class="comment-meta"> <strong class="fn"> Steven Jobs </strong> <span class="comment-date">July 4, 2017 7:25 am </span></header>
+                                                    <header class="comment-meta"> <strong class="fn"> {{ comment.name }} </strong> <span class="comment-date">{{ comment.date_time|date:'Y-m-d H:i' }}</span></header>
                                                     <div class="comment-content entry clr">
-                                                       <p>jeepers unscrupulous anteater attentive noiseless put less greyhound prior stiff ferret unbearably cracked oh.</p>
+                                                       <p>{{ comment.comment }}</p>
                                                     </div>
-                                                    <div class="reply comment-reply-link-div"><a aria-label="Reply to spadmin" href="single.html#respond" class="comment-reply-link" rel="nofollow">Reply</a></div>
+
                                                  </div>
                                               </article>
                                            </li>
-                                           <li id="li-comment-85">
-                                              <article class="comment byuser comment-author-spadmin bypostauthor odd alt thread-even depth-1 clr" id="comment-85">
-                                                 <div class="comment-author vcard"><img width="60" height="60" src="{% static 'images/post-author-avatar.jpg' %}" alt=""></div>
-                                                 <div class="comment-details clr ">
-                                                    <header class="comment-meta"> <strong class="fn"> Steven Jobs <span class="author-badge"></span> </strong> <span class="comment-date">May 10, 2018 2:41 am </span></header>
-                                                    <div class="comment-content entry clr">
-                                                       <p>So sparing more goose caribou wailed went conveniently burned the the the and that save that adroit gosh and sparing armadillo grew some overtook that magnificently that</p>
-                                                    </div>
-                                                    <div class="reply comment-reply-link-div"><a aria-label="Reply to spadmin" href="single.html#respond" class="comment-reply-link" rel="nofollow">Reply</a></div>
-                                                 </div>
-                                              </article>
-                                           </li>
-                                           <li id="li-comment-86">
-                                              <article class="comment byuser comment-author-spadmin bypostauthor even thread-odd thread-alt depth-1 clr" id="comment-86">
-                                                 <div class="comment-author vcard"><img width="60" height="60" src="{% static 'images/post-author-avatar.jpg' %}" alt=""></div>
-                                                 <div class="comment-details clr ">
-                                                    <header class="comment-meta"> <strong class="fn"> Steven Jobs <span class="author-badge"></span> </strong> <span class="comment-date">May 10, 2018 2:42 am </span></header>
-                                                    <div class="comment-content entry clr">
-                                                       <p>Circuitous gull and messily squirrel on that banally assenting nobly some much rakishly goodness that the darn abject hello left because unaccountably spluttered unlike a aurally since contritely thanks</p>
-                                                    </div>
-                                                    <div class="reply comment-reply-link-div"><a aria-label="Reply to spadmin" href="single.html#respond" class="comment-reply-link" rel="nofollow">Reply</a></div>
-                                                 </div>
-                                              </article>
-                                           </li>
+                                           {% endfor %}
                                         </ol> <!--comment list-->
-                                        <nav role="navigation" class="comment-navigation clr">
-                                           <div class="nav-previous span_1_of_2 col col-1"></div>
-                                           <div class="nav-next span_1_of_2 col"> <a href="single.html#comments">Newer Comments →</a></div>
-                                        </nav>
+
                                             {% if messages %}
                                             {% for message in messages %}
                                             {% if message.tags == 'success' %}

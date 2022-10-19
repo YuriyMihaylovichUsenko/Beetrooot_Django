@@ -29,12 +29,24 @@ def datetime_now(request):
     return {'datetime_now': datetime.now()}
 
 
-def mostly_authors(request):
+def authors_most_articles(request):
     mostly_authors = Author.objects.all(
     ).annotate(
         count=Count('article')
     ).order_by('-count')[:13]
-    return {'mostly_authors': mostly_authors}
+    return {'authors_most_articles': mostly_authors}
 
 
+def most_comments(request):
+    most_comments = Article.objects.all(
+    ).annotate(
+        count_comments=Count('comments')
+    ).order_by('-count_comments')
+    return {'most_comments': most_comments}
 
+
+def popular_articles(request):
+    popular_articles = Article.objects.all(
+    ).order_by('-views')
+    print(request)
+    return {'popular_articles': popular_articles}

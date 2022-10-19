@@ -3,7 +3,7 @@
         <div class="top_bar margin-15">
             <div class="row">
                 <div class="col-md-6 col-sm-12 time">
-                    <div class="off-canvas-toggle" id="off-canvas-toggle"><span></span><p class="sidebar-open">MORE</p></div>
+                    <div class="off-canvas-toggle" id="off-canvas-toggle"><span></span><p class="sidebar-open">Sing in</p></div>
                     <i class="fa fa-clock-o"></i><span>&nbsp;&nbsp;&nbsp;{{ datetime_now|date:'Y-m-d'  }}</span>
                 </div>
                 <div class="col-md-6 col-sm-12 social">
@@ -72,7 +72,7 @@
                         </li>
                         <li class="menu-item-has-children"><a href="javascript:void(0)">Authors</a>
                             <ul class="sub-menu">
-                                {% for author in mostly_authors %}
+                                {% for author in authors_most_articles %}
                                 <li><a href="{% url 'all_articles' %}?author={{ author.name }}">{{ author.name }}</a></li>
                                 {% endfor %}
                             </ul>

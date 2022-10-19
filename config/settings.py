@@ -77,7 +77,9 @@ TEMPLATES = [
                 'newspaper.context_processor.tags',
                 'newspaper.context_processor.latest_article',
                 'newspaper.context_processor.datetime_now',
-                'newspaper.context_processor.mostly_authors',
+                'newspaper.context_processor.authors_most_articles',
+                'newspaper.context_processor.most_comments',
+                'newspaper.context_processor.popular_articles',
             ],
             'libraries':{
                 'oldety': 'newspaper.templatetags.oldety',

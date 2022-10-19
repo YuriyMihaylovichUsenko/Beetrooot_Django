@@ -6,31 +6,15 @@
                     <div class="col-xs-12 col-sm-6 col-md-6 col-lg-3">
                         <div class="sidebar-widget">
                         <div class="widget-title-cover"><h4 class="widget-title"><span>Most comments</span></h4></div>
-                        <div class="latest_style_3">
-                            <div class="latest_style_3_item">
-                              <span class="item-count vertical-align">1.</span>
-                                <div class="alith_post_title_small">
-                                    <a href="single.html"><strong>Frtuitous spluttered unlike ouch vivid blinked far inside</strong></a>
+                        <div class="latest_style_2">
+                            {% for article in most_comments|slice:':3' %}
+                            <div class="latest_style_2_item">
+
+                                <div class="alith_post_title">
+                                    <h6 href="{% url 'single' article.slug %}"><strong>{{ article.title }}</strong></h6>
                                 </div>
                             </div>
-                            <div class="latest_style_3_item">
-                              <span class="item-count vertical-align">2.</span>
-                                <div class="alith_post_title_small">
-                                    <a href="single.html"><strong>Against and lantern where a and gnashed nefarious</strong></a>
-                                </div>
-                            </div>
-                            <div class="latest_style_3_item">
-                              <span class="item-count vertical-align">3.</span>
-                                <div class="alith_post_title_small">
-                                    <a href="single.html"><strong>Ouch oh alas crud unnecessary invaluable some</strong></a>
-                                </div>
-                            </div>
-                            <div class="latest_style_3_item">
-                              <span class="item-count vertical-align">4.</span>
-                                <div class="alith_post_title_small">
-                                    <a href="single.html"><strong>And far hey much hello and bashful one save less</strong></a>
-                                </div>
-                            </div>
+                            {% endfor %}
                         </div>
                     </div>
                     </div>
@@ -120,10 +104,10 @@
                 <h1 class="logo"><a href="index.html">HELLO WORLD</a></h1>
                 <div class="tagline social">
                     <ul>
-                        <li class="facebook"><a href="index.html"><i class="fa fa-facebook"></i></a></li>
-                        <li class="twitter"><a href="index.html"><i class="fa fa-twitter"></i></a></li>
-                        <li class="google-plus"><a href="index.html"><i class="fa fa-google-plus"></i></a></li>
-                        <li class="instagram"><a href="index.html"><i class="fa fa-instagram"></i></a></li>
+                        <li class="facebook"><a href="javascript:void(0)"><i class="fa fa-facebook"></i></a></li>
+                        <li class="twitter"><a href="javascript:void(0)"><i class="fa fa-twitter"></i></a></li>
+                        <li class="google-plus"><a href="javascript:void(0)"><i class="fa fa-google-plus"></i></a></li>
+                        <li class="instagram"><a href="javascript:void(0)"><i class="fa fa-instagram"></i></a></li>
                     </ul>
                 </div>
             </div>

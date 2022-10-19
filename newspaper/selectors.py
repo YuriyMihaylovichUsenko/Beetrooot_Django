@@ -32,7 +32,7 @@ def related_articles_selector(article: Article) -> QuerySet[Article]:
     return Article.objects.prefetch_related(
         'images'
     ).filter(
-        tags__in=article.tags.all()
+        category=article.category
     ).exclude(
         images__isnull=False, images__image=''
     )

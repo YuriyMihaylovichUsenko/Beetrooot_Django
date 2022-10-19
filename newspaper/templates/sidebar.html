@@ -3,46 +3,17 @@
     <div class="sidebar-widget animate-box">
         <div class="widget-title-cover"><h4 class="widget-title"><span>Popular Articles</span></h4></div>
         <div class="latest_style_1">
+            {% for article in popular_articles|slice:':7' %}
             <div class="latest_style_1_item">
-              <span class="item-count vertical-align">1.</span>
-                <div class="alith_post_title_small">
-                    <a href="single.html"><strong>Ut enim ad minima veniam, quis nostrum</strong></a>
-                    <p class="meta"><span>2 Sep, 2018</span> <span>268 views</span></p>
+                <div class="post_meta">
+
+                    <figure class="alith_news_img"><a href="{% url 'single' article.slug %}"><img src="{{ article.images.first.image.url }}" alt=""/></a></figure>
+                    <h6 href="{% url 'single' article.slug %}"><strong>{{ article.title }}</strong></h6>
+                    <p class="meta_date"><span>{{ article.date_news|date:'Y-m-d H:i' }}</span> <span>views {{ article.views }}</span></p>
                 </div>
-                <figure class="alith_news_img"><a href="single.html"><img src="{% static 'images/thumb-square-1.png' %}" alt=""/></a></figure>
+
             </div>
-            <div class="latest_style_1_item">
-              <span class="item-count vertical-align">2.</span>
-                <div class="alith_post_title_small">
-                    <a href="single.html"><strong>Curae lacinia consec tetur varius</strong></a>
-                    <p class="meta"><span>2 Sep, 2018</span> <span>268 views</span></p>
-                </div>
-                <figure class="alith_news_img"><a href="single.html"><img src="{% static 'images/thumb-square-2.png' %}" alt=""/></a></figure>
-            </div>
-            <div class="latest_style_1_item">
-              <span class="item-count vertical-align">3.</span>
-                <div class="alith_post_title_small">
-                    <a href="single.html"><strong>Euismod lacus vulpu tate augue</strong></a>
-                    <p class="meta"><span>2 Sep, 2018</span> <span>268 views</span></p>
-                </div>
-                <figure class="alith_news_img"><a href="single.html"><img src="{% static 'images/thumb-square-3.png' %}" alt=""/></a></figure>
-            </div>
-            <div class="latest_style_1_item">
-              <span class="item-count vertical-align">4.</span>
-                <div class="alith_post_title_small">
-                    <a href="single.html"><strong>Quam mauris lorem erat est euismod</strong></a>
-                    <p class="meta"><span>2 Sep, 2018</span> <span>268 views</span></p>
-                </div>
-                <figure class="alith_news_img"><a href="single.html"><img src="{% static 'images/thumb-square-4.png' %}" alt=""/></a></figure>
-            </div>
-            <div class="latest_style_1_item">
-              <span class="item-count vertical-align">5.</span>
-                <div class="alith_post_title_small">
-                    <a href="single.html"><strong>Nec eget ince ptos aenean gravida</strong></a>
-                    <p class="meta"><span>2 Sep, 2018</span> <span>268 views</span></p>
-                </div>
-                <figure class="alith_news_img"><a href="single.html"><img src="{% static 'images/thumb-square-5.png' %}" alt=""/></a></figure>
-            </div>
+        {% endfor %}
         </div>
     </div> <!--.sidebar-widget-->
 
@@ -61,34 +32,14 @@
         <div class="latest_style_2">
             <div class="latest_style_2_item_first">
                 <figure class="alith_post_thumb_big">
-                    <span class="post_meta_categories_label">Legal, Blog</span>
-                    <a href="single.html"><img src="{% static 'images/thumb-large.jpg' %}" alt=""/></a>
+
+                    <a href="{% url 'single' popular_articles.first.slug %}"><img src="{{ popular_articles.first.images.first.image.url }}" alt=""/></a>
                 </figure>
                 <h3 class="alith_post_title">
-                    <a href="single.html"><strong>Nor again is there anyone who loves or pursues or desires to obtain</strong></a>
+                    <a href="{% url 'single' popular_articles.first.slug %}"><strong>{{ popular_articles.first.title }}</strong></a>
                 </h3>
             </div>
-            <div class="latest_style_2_item">
-                <figure class="alith_news_img"><a href="single.html"><img src="{% static 'images/thumb-square-1.png' %}" alt=""/></a></figure>
-                <h3 class="alith_post_title"><a href="single.html">Magna aliqua ut enim ad minim veniam</a></h3>
-                <div class="post_meta">
-                    <span class="meta_date">18 Sep, 2018</span>
-                </div>
-            </div>
-            <div class="latest_style_2_item">
-                <figure class="alith_news_img"><a href="single.html"><img src="{% static 'images/thumb-square-2.png' %}" alt=""/></a></figure>
-                <h3 class="alith_post_title"><a href="single.html">Magna aliqua ut enim ad minim veniam</a></h3>
-                <div class="post_meta">
-                    <span class="meta_date">18 Sep, 2018</span>
-                </div>
-            </div>
-            <div class="latest_style_2_item">
-                <figure class="alith_news_img"><a href="single.html"><img src="{% static 'images/thumb-square-3.png' %}" alt=""/></a></figure>
-                <h3 class="alith_post_title"><a href="single.html">Magna aliqua ut enim ad minim veniam</a></h3>
-                <div class="post_meta">
-                    <span class="meta_date">18 Sep, 2018</span>
-                </div>
-            </div>
+
         </div>
     </div> <!--.sidebar-widget-->
 
