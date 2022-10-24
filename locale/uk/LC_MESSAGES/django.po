@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2022-10-23 20:02+0300\n"
+"POT-Creation-Date: 2022-10-24 14:57+0300\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -21,49 +21,128 @@ msgstr ""
 "100 > 14) ? 1 : n % 1 == 0 && (n % 10 ==0 || (n % 10 >=5 && n % 10 <=9) || "
 "(n % 100 >=11 && n % 100 <=14 )) ? 2: 3);\n"
 
-#: .\config\settings.py:146
+#: .\config\settings.py:148
 msgid "English"
 msgstr ""
 
-#: .\config\settings.py:147
+#: .\config\settings.py:149
 msgid "Ukrainian"
 msgstr ""
 
-#: .\newspaper\templates\base.html:10 .\newspaper\templates\header.html:37
+#: .\newspaper\templates\base.html:10 .\newspaper\templates\footer.html:106
+#: .\newspaper\templates\header.html:47
 msgid "Ukrainian News"
 msgstr "Українські новини"
 
-#: .\newspaper\templates\header.html:7
-msgid "Sing in"
-msgstr "Увійти"
+#: .\newspaper\templates\footer.html:10
+msgid "Most comments"
+msgstr "Найбільше коментарів"
 
-#: .\newspaper\templates\header.html:17
-msgid "SEARCH"
-msgstr "Пошук"
+#: .\newspaper\templates\footer.html:25
+msgid "Latest"
+msgstr "Останні"
 
-#: .\newspaper\templates\header.html:22
-msgid "Search for:"
-msgstr "Шукати"
-
-#: .\newspaper\templates\header.html:38
-msgid "NEWSPAPER / MAGAZINE / PUBLISHER"
-msgstr "ГАЗЕТА / ЖУРНАЛ / ПУБЛІКАЦІЯ"
-
-#: .\newspaper\templates\header.html:49
-msgid "Home"
-msgstr "Додому"
-
-#: .\newspaper\templates\header.html:50
+#: .\newspaper\templates\footer.html:38 .\newspaper\templates\header.html:60
 msgid "Categories"
 msgstr "Категорії"
 
-#: .\newspaper\templates\header.html:57
+#: .\newspaper\templates\footer.html:116
+msgid "All rights reserved. Design by"
+msgstr "Усі права захищені. Дизайн від"
+
+#: .\newspaper\templates\footer.html:122
+msgid "Take Me Top"
+msgstr "Наверх"
+
+#: .\newspaper\templates\header.html:9
+msgid "Sing in"
+msgstr "Увійти"
+
+#: .\newspaper\templates\header.html:27
+msgid "SEARCH"
+msgstr "Пошук"
+
+#: .\newspaper\templates\header.html:32
+msgid "Search for:"
+msgstr "Шукати"
+
+#: .\newspaper\templates\header.html:48
+msgid "NEWSPAPER / MAGAZINE / PUBLISHER"
+msgstr "ГАЗЕТА / ЖУРНАЛ / ПУБЛІКАЦІЯ"
+
+#: .\newspaper\templates\header.html:59
+msgid "Home"
+msgstr "Додому"
+
+#: .\newspaper\templates\header.html:67
 msgid "All News"
 msgstr "Усі новини"
 
-#: .\newspaper\templates\header.html:65
+#: .\newspaper\templates\header.html:68 .\newspaper\templates\sidebar.html:49
+msgid "Tags"
+msgstr "Теги"
+
+#: .\newspaper\templates\header.html:75
 msgid "Authors"
 msgstr "Автори"
+
+#: .\newspaper\templates\index.html:20 .\newspaper\templates\index.html:46
+msgid "views"
+msgstr "переглядів"
+
+#: .\newspaper\templates\index.html:58
+msgid "Recent Posts"
+msgstr "Нещодавні публікації"
+
+#: .\newspaper\templates\sidebar.html:6
+msgid "Popular Articles"
+msgstr "Популярні статті"
+
+#: .\newspaper\templates\sidebar.html:23
+#, fuzzy
+#| msgid "Search for:"
+msgid "Search"
+msgstr "Шукати"
+
+#: .\newspaper\templates\sidebar.html:33
+msgid "Trending"
+msgstr "В тренді"
+
+#: .\newspaper\templates\single.html:53
+msgid "Related Posts"
+msgstr "Схожі публікації"
+
+#: .\newspaper\templates\single.html:74
+msgid "Comments"
+msgstr "Коментарі"
+
+#: .\newspaper\templates\single.html:76
+msgid "There are"
+msgstr "У цієї статті"
+
+#: .\newspaper\templates\single.html:76
+msgid "comments for this article"
+msgstr "коментарів"
+
+#: .\newspaper\templates\single.html:112
+msgid "Your email address will not be published."
+msgstr "Ваш email не буде відображатися"
+
+#: .\newspaper\templates\single.html:115
+msgid "Name (optional)"
+msgstr "Ім'я (Обов'язково)"
+
+#: .\newspaper\templates\single.html:119
+msgid "Email (optional)"
+msgstr "Email (Обов'язково)"
+
+#: .\newspaper\templates\single.html:124
+msgid "Comment"
+msgstr "Коментар"
+
+#: .\newspaper\templates\single.html:141
+msgid "You might be interested in"
+msgstr "Вам може бути цікаво"
 
 #: .\venv\Lib\site-packages\django\contrib\messages\apps.py:15
 msgid "Messages"

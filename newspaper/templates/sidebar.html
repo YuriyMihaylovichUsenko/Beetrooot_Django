@@ -11,7 +11,7 @@
 
                     <figure class="alith_news_img"><a href="{% url 'single' article.slug %}"><img src="{{ article.images.first.image.url }}" alt=""/></a></figure>
                     <h6 href="{% url 'single' article.slug %}"><strong>{{ article|transleter_title:request.LANGUAGE_CODE }}</strong></h6>
-                    <p class="meta_date"><span>{{ article.date_news|date:'Y-m-d H:i' }}</span> <span>views {{ article.views }}</span></p>
+                    <p class="meta_date"><span>{{ article.date_news|date:'Y-m-d H:i' }}</span> <span>{% trans 'views' %} {{ article.views }}</span></p>
                 </div>
 
             </div>

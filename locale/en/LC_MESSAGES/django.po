@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2022-10-23 20:02+0300\n"
+"POT-Creation-Date: 2022-10-24 14:57+0300\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -18,48 +18,125 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
-#: .\config\settings.py:146
+#: .\config\settings.py:148
 msgid "English"
 msgstr ""
 
-#: .\config\settings.py:147
+#: .\config\settings.py:149
 msgid "Ukrainian"
 msgstr ""
 
-#: .\newspaper\templates\base.html:10 .\newspaper\templates\header.html:37
+#: .\newspaper\templates\base.html:10 .\newspaper\templates\footer.html:106
+#: .\newspaper\templates\header.html:47
 msgid "Ukrainian News"
 msgstr ""
 
-#: .\newspaper\templates\header.html:7
-msgid "Sing in"
+#: .\newspaper\templates\footer.html:10
+msgid "Most comments"
 msgstr ""
 
-#: .\newspaper\templates\header.html:17
-msgid "SEARCH"
+#: .\newspaper\templates\footer.html:25
+msgid "Latest"
 msgstr ""
 
-#: .\newspaper\templates\header.html:22
-msgid "Search for:"
-msgstr ""
-
-#: .\newspaper\templates\header.html:38
-msgid "NEWSPAPER / MAGAZINE / PUBLISHER"
-msgstr ""
-
-#: .\newspaper\templates\header.html:49
-msgid "Home"
-msgstr ""
-
-#: .\newspaper\templates\header.html:50
+#: .\newspaper\templates\footer.html:38 .\newspaper\templates\header.html:60
 msgid "Categories"
 msgstr ""
 
-#: .\newspaper\templates\header.html:57
+#: .\newspaper\templates\footer.html:116
+msgid "All rights reserved. Design by"
+msgstr ""
+
+#: .\newspaper\templates\footer.html:122
+msgid "Take Me Top"
+msgstr ""
+
+#: .\newspaper\templates\header.html:9
+msgid "Sing in"
+msgstr ""
+
+#: .\newspaper\templates\header.html:27
+msgid "SEARCH"
+msgstr ""
+
+#: .\newspaper\templates\header.html:32
+msgid "Search for:"
+msgstr ""
+
+#: .\newspaper\templates\header.html:48
+msgid "NEWSPAPER / MAGAZINE / PUBLISHER"
+msgstr ""
+
+#: .\newspaper\templates\header.html:59
+msgid "Home"
+msgstr ""
+
+#: .\newspaper\templates\header.html:67
 msgid "All News"
 msgstr ""
 
-#: .\newspaper\templates\header.html:65
+#: .\newspaper\templates\header.html:68 .\newspaper\templates\sidebar.html:49
+msgid "Tags"
+msgstr ""
+
+#: .\newspaper\templates\header.html:75
 msgid "Authors"
+msgstr ""
+
+#: .\newspaper\templates\index.html:20 .\newspaper\templates\index.html:46
+msgid "views"
+msgstr ""
+
+#: .\newspaper\templates\index.html:58
+msgid "Recent Posts"
+msgstr ""
+
+#: .\newspaper\templates\sidebar.html:6
+msgid "Popular Articles"
+msgstr ""
+
+#: .\newspaper\templates\sidebar.html:23
+msgid "Search"
+msgstr ""
+
+#: .\newspaper\templates\sidebar.html:33
+msgid "Trending"
+msgstr ""
+
+#: .\newspaper\templates\single.html:53
+msgid "Related Posts"
+msgstr ""
+
+#: .\newspaper\templates\single.html:74
+msgid "Comments"
+msgstr ""
+
+#: .\newspaper\templates\single.html:76
+msgid "There are"
+msgstr ""
+
+#: .\newspaper\templates\single.html:76
+msgid "comments for this article"
+msgstr ""
+
+#: .\newspaper\templates\single.html:112
+msgid "Your email address will not be published."
+msgstr ""
+
+#: .\newspaper\templates\single.html:115
+msgid "Name (optional)"
+msgstr ""
+
+#: .\newspaper\templates\single.html:119
+msgid "Email (optional)"
+msgstr ""
+
+#: .\newspaper\templates\single.html:124
+msgid "Comment"
+msgstr ""
+
+#: .\newspaper\templates\single.html:141
+msgid "You might be interested in"
 msgstr ""
 
 #: .\venv\Lib\site-packages\django\contrib\messages\apps.py:15

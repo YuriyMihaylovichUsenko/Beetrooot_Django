@@ -1,6 +1,7 @@
 {% extends 'base.html' %}
 {% load static %}
 {% load oldety %}
+{% load translater %}
 {% load i18n %}
 {% block main %}
 
@@ -26,12 +27,12 @@
                                         <a href="{% url 'single' article.slug %}"><img src="{{ article.images.first.image.url }}" alt=""/></a>
                                     </figure>
                                 </div>
-                                <h3 class="alith_post_title"><a href="{% url 'single' article.slug %}">{{ article.title }}</a></h3>
+                                <h3 class="alith_post_title"><a href="{% url 'single' article.slug %}">{{ article|transleter_title:request.LANGUAGE_CODE }}</a></h3>
                                 <div class="post_meta">
-                                    <span class="meta_date">{{ article.author.name }}</span>
+                                    <span class="meta_date">{{ article.author|transleter_names:request.LANGUAGE_CODE }}</span>
                                     <span class="meta_date">{{ article.date_news|date:'Y-m-d H:i' }}</span>
                                 </div>
-                                <p class="alith_post_except">{{ article.description }}</p>
+                                <p class="alith_post_except">{{ article|transleter_description:request.LANGUAGE_CODE }}</p>
                                 <div class="line-space"></div>
                             </article>
                             {% endfor %}
