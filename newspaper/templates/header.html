@@ -1,10 +1,21 @@
+{% load i18n %}
+{% load i18n_switcher %}
+{% load translater %}
 <div class="container-fluid">
     <div class="container">
         <div class="top_bar margin-15">
             <div class="row">
                 <div class="col-md-6 col-sm-12 time">
-                    <div class="off-canvas-toggle" id="off-canvas-toggle"><span></span><p class="sidebar-open">Sing in</p></div>
+                    <div class="off-canvas-toggle" id="off-canvas-toggle"><span></span><p class="sidebar-open">{% trans 'Sing in' %}</p></div>
                     <i class="fa fa-clock-o"></i><span>&nbsp;&nbsp;&nbsp;{{ datetime_now|date:'Y-m-d'  }}</span>
+{#                    <div class="header-lang">#}
+                        {% get_current_language as LANGUAGE_CODE %}
+                        {% if request.LANGUAGE_CODE == 'uk' %}
+                        <a href="{{ request|switch_i18n:'default' }}" class="header-lang__lang en active"><i class="flag-us flag mr-2"></i>English</a>
+                        {% else %}
+                        <a href="{{ request|switch_i18n:'uk' }}" class="header-lang__lang uk active"><i class="flag-ua flag mr-2"></i>Українська</a>
+                        {% endif %}
+{#                    </div>#}
                 </div>
                 <div class="col-md-6 col-sm-12 social">
                     <ul>
@@ -13,12 +24,12 @@
                         <li><a href="index.html"><i class="fa fa-google-plus"></i></a></li>
                     </ul>
                     <div class="top-search">
-                        <i class="fa fa-search"></i><span>SEARCH</span>
+                        <i class="fa fa-search"></i><span>{% trans 'SEARCH' %}</span>
                     </div>
                     <div class="top-search-form">
                         <form action="index.html#" class="search-form" method="get" role="search">
                             <label>
-                                <span class="screen-reader-text">Search for:</span>
+                                <span class="screen-reader-text">{% trans 'Search for:' %}</span>
                                 <input type="search" name="s" value="" placeholder="Search …" class="search-field">
                             </label>
                             <input type="submit" value="Search" class="search-submit">
@@ -33,8 +44,8 @@
     <div class="container">
         <div class="row">
             <div class="col-12 col-md-12 header">
-                <h1 class="logo"><a href="{% url 'index' %}">HELLO WORLD</a></h1>
-                <p class="tagline">NEWSPAPER / MAGAZINE / PUBLISHER</p>
+                <h1 class="logo"><a href="{% url 'index' %}">{% trans 'Ukrainian News' %}</a></h1>
+                <p class="tagline">{% trans 'NEWSPAPER / MAGAZINE / PUBLISHER' %}</p>
             </div>
         </div>
     </div>
@@ -45,35 +56,26 @@
             <div class="row">
                 <div class="col-12 col-md-12 main_nav_cover" id="nav">
                     <ul id="main-menu">
-                        <li class="menu-item-has-children"><a href="{% url 'index' %}">Home</a>
-                            <ul class="sub-menu">
-                                <li><a href="index.html">Default</a></li>
-                                <li><a href="home-grid.html">Grid</a></li>
-                                <li><a href="home-slide.html">Big slide</a></li>
-                                <li><a href="home-carausel.html">Carausel</a></li>
-                                <li><a href="home-boxed.html">Boxed layout</a></li>
-                                <li><a href="home-rtl.html">RTL layout</a></li>
-                            </ul>
-                        </li>
-                        <li class="menu-item-has-children"><a>Categories</a>
+                        <li class="menu-item-has-children"><a href="{% url 'index' %}">{% trans 'Home' %}</a></li>
+                        <li class="menu-item-has-children"><a>{% trans 'Categories' %}</a>
                             <ul class="sub-menu">
                                 {% for category in categories %}
-                                    <li><a href="{% url 'all_articles' %}?category={{ category.name }}">{{ category.name }}</a></li>
+                                    <li><a href="{% url 'all_articles' %}?category={{ category.name }}">{{ category|transleter_names:request.LANGUAGE_CODE }}</a></li>
                                 {% endfor %}
                             </ul>
                         </li>
-                        <li><a href="{% url 'all_articles' %}">All News</a></li>
-                        <li class="menu-item-has-children"><a href="javascript:void(0)">Tags</a>
+                        <li><a href="{% url 'all_articles' %}">{% trans 'All News' %}</a></li>
+                        <li class="menu-item-has-children"><a href="javascript:void(0)">{% trans 'Tags' %}</a>
                             <ul class="sub-menu">
                                 {% for tag in tags %}
-                                <li><a href="{% url 'all_articles' %}?tag={{ tag.name }}">{{ tag }}</a></li>
+                                <li><a href="{% url 'all_articles' %}?tag={{ tag.name }}">{{ tag|transleter_names:request.LANGUAGE_CODE }}</a></li>
                                 {% endfor %}
                             </ul>
                         </li>
-                        <li class="menu-item-has-children"><a href="javascript:void(0)">Authors</a>
+                        <li class="menu-item-has-children"><a href="javascript:void(0)">{% trans 'Authors' %}</a>
                             <ul class="sub-menu">
                                 {% for author in authors_most_articles %}
-                                <li><a href="{% url 'all_articles' %}?author={{ author.name }}">{{ author.name }}</a></li>
+                                <li><a href="{% url 'all_articles' %}?author={{ author.name }}">{{ author|transleter_names:request.LANGUAGE_CODE }}</a></li>
                                 {% endfor %}
                             </ul>
                     </ul>

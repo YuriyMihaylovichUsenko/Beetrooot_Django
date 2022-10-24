@@ -1,5 +1,7 @@
 {% extends 'base.html' %}
 {% load static %}
+{% load i18n %}
+{% load translater %}
 {% block main %}
 <div id="page-content-wrapper">
     {% include 'header.html' %}
@@ -14,8 +16,8 @@
                                 <a href="{% url 'single' article.slug %}"><img src="{{ article.images.first.image.url }}" alt=""/></a>
                             </figure>
                             <div class="alith_post_title_small">
-                                <a href="{% url 'single' article.slug %}"><strong>{{ article.title }} </strong></a>
-                                <p class="meta"><span>{{ article.date_news|date:'Y-m-d H:m' }}</span> <span>{{ article.views }} views</span></p>
+                                <a href="{% url 'single' article.slug %}"><strong>{{ article|transleter_title:request.LANGUAGE_CODE }} </strong></a>
+                                <p class="meta"><span>{{ article.date_news|date:'Y-m-d H:m' }}</span> <span>{{ article.views }} {% trans 'views' %}</span></p>
                             </div>
                         </div>
                     </div>
@@ -37,11 +39,11 @@
                                 <a href="{% url 'single' article.slug %}"><img src="{{ article.images.first.image.url }}" alt=""/></a>
                             </figure>
                             <h2 class="alith_post_title animate-box" data-animate-effect="fadeInUp">
-                                <a href="{% url 'single' article.slug %}">{{ article.title }}</a>
+                                <a href="{% url 'single' article.slug %}">{{ article|transleter_title:request.LANGUAGE_CODE }}</a>
 
                             </h2>
                             <p class="meta_date"><span>{{ article.date_news|date:'Y-m-d H:m' }}   </span>
-                                <span>          {{ article.views }} views</span></p>
+                                <span>          {{ article.views }} {% trans 'views' %}</span></p>
                             <div class="alith_post_content_big">
                                 <div class="row">
 
@@ -50,38 +52,56 @@
                             </div>
                         </div>
                         {% endfor %}
-{#
                     </div>
                     <div class="post_list post_list_style_1">
                         <div class="alith_heading">
-                            <h2 class="alith_heading_patern_2">Recent Posts</h2>
+                            <h2 class="alith_heading_patern_2">{% trans 'Recent Posts' %}</h2>
                         </div>
                         {% for article in articles %}
                         <article class="row section_margin animate-box">
                             <div class="col-md-3 animate-box">
-                                <figure class="alith_news_img"><a href="{% url 'single' article.slug %}"><img src="{{ article.images.first.image.url }}" alt="{{ article.name }}" /></a></figure>
+                                <figure class="alith_news_img"><a href="{% url 'single' article.slug %}"><img src="{{ article.images.first.image.url }}" alt="{{ article }}" /></a></figure>
                             </div>
                             <div class="col-md-9 animate-box">
-                                <h3 class="alith_post_title"><a href="{% url 'single' article.slug %}">{{ article.title }}</a></h3>
+                                <h3 class="alith_post_title"><a href="{% url 'single' article.slug %}">{{ article|transleter_title:request.LANGUAGE_CODE }}</a></h3>
                                 <div class="post_meta">
-                                    <a href="javascript:void(0)" class="meta_author_avatar"><img src={{ article.author.foto.url }} alt="{{ article.author.name }}"/></a>
-                                    <span class="meta_author_name"><a href="javascript:void(0)" class="author">{{ article.author.name }}</a></span>
-                                    <span class="meta_categories"><a href="{% url 'all_articles' %}?category={{ article.category.name }}">{{ article.category }}</a></span>
+                                    <a href="javascript:void(0)" class="meta_author_avatar"><img src={{ article.author.foto.url }} alt="{{ article.author|transleter_names:request.LANGUAGE_CODE }}"/></a>
+                                    <span class="meta_author_name"><a href="javascript:void(0)" class="author">{{ article.author|transleter_names:request.LANGUAGE_CODE }}</a></span>
+                                    <span class="meta_categories"><a href="{% url 'all_articles' %}?category={{ article.category.name }}">{{ article.category|transleter_names:request.LANGUAGE_CODE }}</a></span>
                                     <span class="meta_date">{{ article.date_news|date:'Y-m-d H:i' }}</span>
                                 </div>
                             </div>
                         </article>
                         {% endfor %}
 
-                    <div class="site-pagination animate-box">
-                        <ul class="page-numbers">
-                            <li><a href="index.html#" class="prev page-numbers">PREV</a></li>
-                                  {% for i in paginator.page_range %}
-                            <li><a href="{{request.path}}?page={{i}}" class="page-numbers">{{i}}.</a></li>
-                            {% endfor %}
-                            <li><a href="index.html#" class="next page-numbers">NEXT</a></li>
-                        </ul>
-                    </div>
+{#                    <div class="site-pagination animate-box">#}
+{#                        <ul class="page-numbers">#}
+{#                            <li><a href="index.html#" class="prev page-numbers">PREV</a></li>#}
+{#                                  {% for i in paginator.page_range %}#}
+{#                            <li><a href="{{request.path}}?page={{i}}" class="page-numbers">{{i}}.</a></li>#}
+{#                            {% endfor %}#}
+{#                            <li><a href="index.html#" class="next page-numbers">NEXT</a></li>#}
+{#                        </ul>#}
+{#                    </div>#}
+                    {% if is_paginated %}
+<ul class="pagination toolbox-item">
+   <li>
+        <a href="{{request.path}}?page=1{% if request.GET.q %}&q={{ request.GET.q }}{% endif %}">
+        <i class="fa fa-angle-double-left"></i>
+        </a>
+    </li>
+    {% for i in paginator.page_range %}
+      {% if forloop.counter|add:5 > page_obj.number and forloop.counter < page_obj.number|add:5 %}
+        <li class="page-item"><a class="page-link" href="{{request.path}}?page={{i}}{% if request.GET.q %}&q={{ request.GET.q }}{% endif %}">{{ i }}</a></li>
+      {% endif %}
+    {% endfor %}
+    <li>
+        <a href="{{request.path}}?page={{paginator.num_pages}}{% if request.GET.q %}&q={{ request.GET.q }}{% endif %}">
+            <i class="fa fa-angle-double-right"></i>
+        </a>
+    </li>
+</ul>
+{% endif %}
                     </div>
                 </div>
                 <!--Start Sidebar-->

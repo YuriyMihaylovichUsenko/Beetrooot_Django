@@ -1,8 +1,10 @@
 {% extends 'base.html' %}
 {% load static %}
 {% load oldety %}
+{% load translater %}
+{% load i18n %}
 {% load widget_tweaks %}
-{% block title %}Simple life in big city{% endblock %}
+{% block title %}{{ article|transleter_title:request.LANGUAGE_CODE }}{% endblock %}
 {% block main %}
 
 <div id="page-content-wrapper">
@@ -23,22 +25,22 @@
                         <figure class="alith_news_img animate-box"><a><img src="{{ article.images.first.image.url }}" alt=""/></a></figure>
                         <div class="post-content">
                             <div class="single-header">
-                                <h3 class="alith_post_title">{{ article.title }}</h3>
+                                <h3 class="alith_post_title">{{ article|transleter_title:request.LANGUAGE_CODE }}</h3>
                                 <div class="post_meta">
-                                    <span class="meta_author_name"><a class="author">{{ article.author.name }}</a></span>
-                                    <span class="meta_categories"><a href="http://demos.alithemes.com/html/hewo/archive.html">{{ article.category }}</a></span>
+                                    <span class="meta_author_name"><a class="author">{{ article.author|transleter_names:request.LANGUAGE_CODE }}</a></span>
+                                    <span class="meta_categories"><a href="http://demos.alithemes.com/html/hewo/archive.html">{{ article.category|transleter_names:request.LANGUAGE_CODE }}</a></span>
                                     <span class="meta_date">{{ article.date_news|date:'Y-m-d H:i' }}</span>
                                 </div>
                             </div>
                             <div class="single-content animate-box">
-                                <p class="alith_post_except animate-box">{{ article.description}}</p>
+                                <p class="alith_post_except animate-box">{{ article|transleter_description:request.LANGUAGE_CODE}}</p>
                                 <div class="dropcap column-2 animate-box">
-                                   <p>{{ article.text|safe}}</p>
+                                   <p>{{ article|transleter_text:request.LANGUAGE_CODE|safe}}</p>
                                 </div>
                                 <div class="post-tags">
                                     <div class="post-tags-inner">
                                         {% for tag in article.tags.all %}
-                                        <a rel="tag" href="category-grid.html">{{ tag.name|my_upper }}</a>
+                                        <a rel="tag" href="category-grid.html">{{ tag|transleter_names:request.LANGUAGE_CODE|my_upper }}</a>
                                         {% endfor %}
                                     </div>
                                 </div>
@@ -48,12 +50,12 @@
                                     <div class="row">
 
 
-                                                <div class="widget-title-cover"><h4 class="widget-title"><span>Related Posts</span></h4></div>
+                                                <div class="widget-title-cover"><h4 class="widget-title"><span>{% trans 'Related Posts' %}</span></h4></div>
                                                 <div class="latest_style_3">
                                                     {% for article in random_articles_4 %}
                                                     <div class="latest_style_2_item">
                                                     <figure class="alith_news_img"><a href="{% url 'single' article.slug %}"><img class="hover_grey" src="{{ article.images.first.image.url }}" alt=""></a></figure>
-                                                    <h3 class="alith_post_title"><a href="single.html">{{ article.title }}</a></h3>
+                                                    <h3 class="alith_post_title"><a href="single.html">{{ article|transleter_title:request.LANGUAGE_CODE }}</a></h3>
                                                     </div>
                                                     {% endfor %}
                                                 </div>
@@ -69,9 +71,9 @@
                             </div> <!--single content-->
                             <div class="single-comment">
                                 <section id="comments">
-                                   <h4 class="single-comment-title">Comments</h4>
+                                   <h4 class="single-comment-title">{% trans 'Comments' %}</h4>
                                    <div class="comments-inner clr">
-                                      <div class="comments-title"> <p>There are {{ article.comments.all.count }} comments for this article</p></div>
+                                      <div class="comments-title"> <p>{% trans 'There are' %} {{ article.comments.all.count }} {% trans 'comments for this article' %}</p></div>
                                         <ol class="commentlist">
                                            {% for comment in article.comments.all %}
                                            <li id="li-comment-5">
@@ -107,19 +109,19 @@
                                            <h3 class="comment-reply-title" id="reply-title">Leave a Reply <small><a href="single.html#respond" id="cancel-comment-reply-link" rel="nofollow"><i class="fa fa-times"></i></a></small></h3>
                                            <form novalidate="" class="comment-form" id="commentform" method="post" >
                                                {% csrf_token %}
-                                              <p class="comment-notes"><span id="email-notes">Your email address will not be published.</span></p>
+                                              <p class="comment-notes"><span id="email-notes">{% trans 'Your email address will not be published.' %}</span></p>
                                               <div class="row">
 
-                                                 <div class="comment-form-author col-sm-12 col-md-6"> <label for="author">Name (optional)</label>
+                                                 <div class="comment-form-author col-sm-12 col-md-6"> <label for="author">{% trans 'Name (optional)' %}</label>
                                                      {% render_field form.name type="text" class="form-control" placeholder="Your Name" minlength="2" maxlength="50" id="contact-name" %}
 {#                                                     <input type="text" size="30" value="" placeholder="Your name *" name="author" id="author" maxlength="50">#}
                                                  </div>
-                                                 <div class="comment-form-email col-sm-12 col-md-6"> <label for="email">Email (optional)</label>
+                                                 <div class="comment-form-email col-sm-12 col-md-6"> <label for="email">{% trans 'Email (optional)' %}</label>
                                                      {% render_field form.email type="email" class="form-control" placeholder="Your E-mail" id="contact-email" %}
 {#                                                     <input type="email" size="30" value="" placeholder="Email *" name="email" id="email" maxlength="50">#}
                                                  </div>
                                               </div>
-                                              <p class="comment-form-comment"><label for="comment">Comment</label>
+                                              <p class="comment-form-comment"><label for="comment">{% trans 'Comment' %}</label>
 {#                                                  <textarea aria-required="true" placeholder="Your Comment" rows="8" cols="45" name="comment" id="comment"></textarea>#}
                                                     {% render_field form.comment class="form-control" placeholder="Your Message" maxlength="1000" id="comment" %}</p>
                                               <p class="form-submit">
@@ -136,13 +138,13 @@
                         </div>
                     </article>
                     <div class="single-more-articles single-disable-inview">
-                        <h4><span>You might be interested in</span></h4>
+                        <h4><span>{% trans 'You might be interested in' %}</span></h4>
                         <span class="single-more-articles-close-button"><i class="fa fa-times" aria-hidden="true"></i></span>
                         <div class="latest_style_2">
                             {% for article in random_articles_2 %}
                             <div class="latest_style_2_item">
                                 <figure class="alith_news_img"><a href="{% url 'single' article.slug %}"><img class="hover_grey" src="{{ article.images.first.image.url }}" alt=""></a></figure>
-                                <h3 class="alith_post_title"><a href="{% url 'single' article.slug %}">{{ article.title }}</a></h3>
+                                <h3 class="alith_post_title"><a href="{% url 'single' article.slug %}">{{ article|transleter_title:request.LANGUAGE_CODE }}</a></h3>
                             </div>
                                 {% endfor %}
 {#                            <div class="latest_style_2_item">#}

@@ -18,6 +18,7 @@ class Image(models.Model):
 
 class Tag(models.Model):
     name = models.CharField(max_length=50)
+    name_en = models.CharField(max_length=50, null=True, default="")
     slug = models.SlugField(unique=True)
 
 
@@ -26,6 +27,7 @@ class Tag(models.Model):
 
 class Author(models.Model):
     name = models.CharField(max_length=50)
+    name_en = models.CharField(max_length=50, null=True, default="")
     foto = models.ImageField(upload_to='images.authors')
 
 
@@ -34,6 +36,7 @@ class Author(models.Model):
 
 class Category(models.Model):
     name = models.CharField(max_length=50)
+    name_en = models.CharField(max_length=50, null=True, default="")
     slug = models.SlugField(unique=True, null=True)
 
     class Meta:

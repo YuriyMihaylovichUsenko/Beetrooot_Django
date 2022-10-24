@@ -27,19 +27,6 @@ class IndexView(ListView):
     ).order_by('-date_news')
 
 
-# class CategoryView(ListView):
-#     template_name = 'category-grid.html'
-#     model = Article
-#     context_object_name = 'articles'
-#     slug_url_kwarg = 'slug'
-#     paginate_by = 2
-#
-#     def get_queryset(self):
-#         category_filter = {'category__slug': self.kwargs.get('slug')}
-#         return Article.objects.prefetch_related(
-#             'images', 'category'
-#         ).filter(**category_filter).order_by('-date_news')
-
 class AllArticlesView(ListView):
     template_name = 'category-grid.html'
     model = Article
@@ -53,6 +40,8 @@ class AllArticlesView(ListView):
         #     self.paginate_by = page_by
         self.category = Category.objects.get(name=self.request.GET['category']) \
             if self.request.GET.get('category') else None
+        print(self.category)
+        print(self.request.GET.get('category'))
         self.tag = Tag.objects.get(name=self.request.GET['tag']) \
             if self.request.GET.get('tag') else None
         self.author = Author.objects.get(name=self.request.GET['author']) \
@@ -67,14 +56,13 @@ class AllArticlesView(ListView):
             _filter |= {'tags': self.tag}
         if self.author:
             _filter |= {'author': self.author}
-        return Article.objects.prefetch_related(
+        articles = Article.objects.prefetch_related(
             'images', 'category', 'tags', 'author'
         ).filter(**_filter).order_by('-date_news')
+        print(articles)
+        return articles
 
-    # def get_context_data(self, **kwargs):
-    #     context = super().get_context_data(**kwargs)
-    #     context |= {'datetime_now': datetime.now()}
-    #     return context
+
 
 class SingleView(FormView, DetailView):
     template_name = 'single.html'

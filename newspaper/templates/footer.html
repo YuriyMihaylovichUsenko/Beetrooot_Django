@@ -1,17 +1,19 @@
 {% load static %}
+{% load i18n %}
+{% load translater %}
 <div class="container-fluid">
     <div class="container animate-box">
         <div class="bottom margin-15">
                 <div class="row">
                     <div class="col-xs-12 col-sm-6 col-md-6 col-lg-3">
                         <div class="sidebar-widget">
-                        <div class="widget-title-cover"><h4 class="widget-title"><span>Most comments</span></h4></div>
+                        <div class="widget-title-cover"><h4 class="widget-title"><span>{% trans 'Most comments' %}</span></h4></div>
                         <div class="latest_style_2">
                             {% for article in most_comments|slice:':3' %}
                             <div class="latest_style_2_item">
 
                                 <div class="alith_post_title">
-                                    <h6 href="{% url 'single' article.slug %}"><strong>{{ article.title }}</strong></h6>
+                                    <h6 href="{% url 'single' article.slug %}"><strong>{{ article|transleter_title:request.LANGUAGE_CODE }}</strong></h6>
                                 </div>
                             </div>
                             {% endfor %}
@@ -20,12 +22,12 @@
                     </div>
                     <div class="col-xs-12 col-sm-6 col-md-6 col-lg-3">
                         <div class="sidebar-widget">
-                            <div class="widget-title-cover"><h4 class="widget-title"><span>Latest</span></h4></div>
+                            <div class="widget-title-cover"><h4 class="widget-title"><span>{% trans 'Latest' %}</span></h4></div>
                             <div class="latest_style_2">
                                 {% for article in latest_article %}
                                 <div class="latest_style_2_item">
                                     <figure class="alith_news_img"><a href="{% url 'single' article.slug %}"><img alt="" src="{{ article.images.first.image.url }}" class="hover_grey"></a></figure>
-                                    <h3 class="alith_post_title"><a href="{% url 'single' article.slug %}">{{ article.title }}</a></h3>
+                                    <h3 class="alith_post_title"><a href="{% url 'single' article.slug %}">{{ article|transleter_title:request.LANGUAGE_CODE }}</a></h3>
                                 </div>
                                 {% endfor %}
                             </div>
@@ -33,10 +35,10 @@
                     </div>
                     <div class="col-xs-12 col-sm-6 col-md-6 col-lg-3">
                         <div class="sidebar-widget">
-                            <div class="widget-title-cover"><h4 class="widget-title"><span>Categories</span></h4></div>
+                            <div class="widget-title-cover"><h4 class="widget-title"><span>{% trans 'Categories' %}</span></h4></div>
                             <ul class="bottom_menu">
                                 {% for category in categories %}
-                                <li><a href="{% url 'all_articles' %}?category={{ category.name }}" class=""><i class="fa fa-angle-right"></i>&nbsp;&nbsp;{{ category.name }}</a></li>
+                                <li><a href="{% url 'all_articles' %}?category={{ category.name }}" class=""><i class="fa fa-angle-right"></i>&nbsp;&nbsp;{{ category|transleter_names:request.LANGUAGE_CODE }}</a></li>
                                 {% endfor %}
                             </ul>
                         </div>
@@ -101,7 +103,7 @@
     <div class="container">
         <div class="row">
             <div class="col-12 col-md-12 bottom-logo">
-                <h1 class="logo"><a href="index.html">HELLO WORLD</a></h1>
+                <h1 class="logo"><a href="index.html">{% trans 'Ukrainian News' %}</a></h1>
                 <div class="tagline social">
                     <ul>
                         <li class="facebook"><a href="javascript:void(0)"><i class="fa fa-facebook"></i></a></li>
@@ -111,11 +113,11 @@
                     </ul>
                 </div>
             </div>
-            <div class="col-12 col-md-12 coppyright"> <p>© Copyright 2018, All rights reserved. Design by <a href="https://alithemes.com" title="AliTheme">Alithemes.com</a></p> </div>
+            <div class="col-12 col-md-12 coppyright"> <p>© Copyright 2022, {% trans 'All rights reserved. Design by' %} <a href="https://alithemes.com" title="AliTheme">Alithemes.com</a></p> </div>
         </div>
     </div>
 </div>
 
 <div class="gototop js-top">
-    <a href="index.html#" class="js-gotop"><span>Take Me Top</span></a>
+    <a href="index.html#" class="js-gotop"><span>{% trans 'Take Me Top' %}</span></a>
 </div>

@@ -20,3 +20,7 @@ def oldety_func(value):
 @register.filter
 def my_upper(value: str):
     return value.upper()
+
+
+
+
