@@ -15,6 +15,7 @@ from .selectors import (
     latest_article_selector,
     tags_for_1_article_selector
 )
+from . utils.send_email import send_email_func
 
 
 class IndexView(ListView):
@@ -156,12 +157,17 @@ class SingleView(FormView, DetailView):
         messages.add_message(
             self.request, messages.SUCCESS, 'Thank you for comment'
         )
-        send_mail(
-            'test_subject',
-            'Sank you',
-            settings.DEFAULT_FROM_EMAIL,
-            [form.cleaned_data.get('email')]
+
+        send_email_func(
+            subject='django',
+            recipient_list=[form.cleaned_data.get('email')],
+            html_template='email.html',
+            context={'name': form.cleaned_data.get('name'),
+                     'link': self.request.build_absolute_uri(reverse('index'))
+                     },
+            # message='Sank you'
         )
+
         return super().form_valid(form)
 
     def form_invalid(self, form):
