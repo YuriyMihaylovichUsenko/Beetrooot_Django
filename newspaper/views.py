@@ -1,11 +1,12 @@
 from datetime import datetime
 from random import sample
 
-from django.db.models import Max, Count
+from django.contrib.postgres.search import SearchRank, SearchVector, SearchQuery
+from django.db.models import Max, Count, Q
 from django.views.generic import DetailView, ListView, FormView
 from django.urls import reverse
 from django.contrib import messages
-
+from django.core.mail import send_mail, settings
 
 from .models import Article, Comment, Category, Tag, Author
 from .forms import CommentForm
@@ -34,18 +35,17 @@ class AllArticlesView(ListView):
     # slug_url_kwarg = 'slug'
     paginate_by = 6
 
-
     def get(self, request, *args, **kwargs):
         # if page_by := self.request.GET.get('count'):
         #     self.paginate_by = page_by
         self.category = Category.objects.get(name=self.request.GET['category']) \
             if self.request.GET.get('category') else None
-        print(self.category)
-        print(self.request.GET.get('category'))
         self.tag = Tag.objects.get(name=self.request.GET['tag']) \
             if self.request.GET.get('tag') else None
         self.author = Author.objects.get(name=self.request.GET['author']) \
             if self.request.GET.get('author') else None
+        self.search = self.request.GET['s'] \
+            if self.request.GET.get('s') else None
         return super().get(request, *args, **kwargs)
 
     def get_queryset(self):
@@ -56,12 +56,65 @@ class AllArticlesView(ListView):
             _filter |= {'tags': self.tag}
         if self.author:
             _filter |= {'author': self.author}
+        if self.search:
+            _filter |= {'author': self.author}
         articles = Article.objects.prefetch_related(
             'images', 'category', 'tags', 'author'
         ).filter(**_filter).order_by('-date_news')
         print(articles)
         return articles
 
+
+class SearchView(ListView):
+    template_name = 'category-grid.html'
+    model = Article
+    context_object_name = 'articles'
+    # slug_url_kwarg = 'slug'
+    paginate_by = 6
+
+    def get(self, request, *args, **kwargs):
+        self.search = self.request.GET['s'] \
+            if self.request.GET.get('s') else None
+        return super().get(request, *args, **kwargs)
+
+    def get_queryset(self):
+        articles = Article.objects.prefetch_related(
+            'images', 'category', 'tags', 'author'
+        ).annotate(
+            rank=self._priority()
+        ).filter(
+            rank__gte=0.3
+        ).order_by(
+            '-rank'
+        )
+        # articles = Article.objects.prefetch_related(
+        #     'images', 'category', 'tags', 'author'
+        # ).filter(
+        #     Q(title_en__icontains=self.search)
+        # )
+        return articles
+
+    def _priority(self) -> SearchRank:
+        if self.request.LANGUAGE_CODE == 'en-us':
+            vector = SearchVector('title_en', weight='A') \
+                     + SearchVector('description_en', weight='B') \
+                     + SearchVector('text_en', weight='A')
+
+            query = SearchQuery(self.search)
+            rank = SearchRank(
+                vector,
+                query,
+            )
+        else:
+            vector = SearchVector('title', weight='A') \
+                     + SearchVector('description', weight='B') \
+                     + SearchVector('text', weight='A')
+            query = SearchQuery(self.search)
+            rank = SearchRank(
+                vector,
+                query,
+            )
+        return rank
 
 
 class SingleView(FormView, DetailView):
@@ -73,7 +126,7 @@ class SingleView(FormView, DetailView):
     form_class = CommentForm
 
     def get_success_url(self):
-        return reverse('single', args=(self.get_object().slug, ))
+        return reverse('single', args=(self.get_object().slug,))
 
     def get_context_data(self, **kwargs):
         self.object = self.get_object()
@@ -93,7 +146,6 @@ class SingleView(FormView, DetailView):
 
         return context
 
-
     def form_valid(self, form):
         data_for_writing = form.cleaned_data | {
             'article': self.get_object(),
@@ -104,6 +156,12 @@ class SingleView(FormView, DetailView):
         messages.add_message(
             self.request, messages.SUCCESS, 'Thank you for comment'
         )
+        send_mail(
+            'test_subject',
+            'Sank you',
+            settings.DEFAULT_FROM_EMAIL,
+            [form.cleaned_data.get('email')]
+        )
         return super().form_valid(form)
 
     def form_invalid(self, form):
@@ -112,16 +170,17 @@ class SingleView(FormView, DetailView):
         )
         return super().form_invalid(form)
 
-class TagsViews(ListView):
-    template_name = 'category-tags.html'
-    model = Article
-    context_object_name = 'tags'
-    slug_url_kwarg = 'slug'
-    paginate_by = 2
 
-    def get_queryset(self):
-        return Article.objects.prefetch_related(
-            'images', 'author'
-        ).filter(
-            tags__slug=self.kwargs.get('slug')
-        ).order_by('-date_news')
+# class TagsViews(ListView):
+#     template_name = 'category-tags.html'
+#     model = Article
+#     context_object_name = 'tags'
+#     slug_url_kwarg = 'slug'
+#     paginate_by = 2
+#
+#     def get_queryset(self):
+#         return Article.objects.prefetch_related(
+#             'images', 'author'
+#         ).filter(
+#             tags__slug=self.kwargs.get('slug')
+#         ).order_by('-date_news')
