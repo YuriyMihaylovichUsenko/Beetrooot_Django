@@ -6,6 +6,41 @@
 {% block main %}
 <div id="page-content-wrapper">
     {% include 'header.html' %}
+    <div class="col-md-6">
+						<div class="heading mb-1">
+							<h2 class="title">Sign Up</h2>
+						</div>
+
+						<form action="/signup/" method="post">
+							{% csrf_token %}
+							<label for="register-username">
+								Username
+								<span class="required">*</span>
+							</label>
+							{% render_field form.username type="text" class="form-input form-wide" placeholder="Your Name" minlength="2" maxlength="50" id="register-username" %}
+							<label for="register-email">
+								Email address
+								<span class="required">*</span>
+							</label>
+							{% render_field form.email type="email" class="form-input form-wide" placeholder="Email" id="register-email" %}
+							<label for="register-password1">
+								Password
+								<span class="required">*</span>
+							</label>
+							{% render_field form.password1 type="password" class="form-input form-wide" placeholder="Password" id="register-password1" %}
+							<label for="register-password2">
+								Password
+								<span class="required">*</span>
+							</label>
+							{% render_field form.password2 type="password" class="form-input form-wide" placeholder="Confirm password" id="register-password2" %}
+
+							<div class="form-footer mb-2">
+								<button type="submit" class="btn btn-dark btn-md w-100 mr-0">
+									Register
+								</button>
+							</div>
+						</form>
+					</div>
     <div class="container-fluid">
         <div class="container animate-box">
             <div class="row">

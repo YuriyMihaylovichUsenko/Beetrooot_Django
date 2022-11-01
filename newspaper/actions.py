@@ -6,11 +6,11 @@ from django.db.models import Model
 
 loger = logging.getLogger('logit')
 
+
 def translate_article(modeladmin, request, queryset):
 
     for obj in queryset:
         Thread(target=translate_object, args=(obj,)).start()
-
 
 
 def translate_object(obj: Model):
@@ -27,6 +27,7 @@ def translate_object(obj: Model):
     except Exception as error:
         loger.info(f'Errorrr {error}')
 
+
 translate_article.short_description = 'Translate Articles'
 
 
@@ -36,7 +37,6 @@ def translate_objects(modeladmin, request, queryset):
         obj_list.append(obj)
     loger.info(f'{list(queryset)}')
     Thread(target=translate_names, args=(obj_list, modeladmin.model)).start()
-
 
 
 def translate_names(obj_list: [Model], model: Model):
@@ -55,7 +55,6 @@ def translate_names(obj_list: [Model], model: Model):
         # loger.info(obj_list)
     except Exception as error:
         loger.error(f'Translating name error -> {error}')
-
 
 
 translate_objects.short_description = 'Translate Objects'

@@ -15,11 +15,9 @@ def create_category_urls(link):
     with Session() as session:
         print('Session')
         response = session.get(link)
-        # print(response)
         assert response.status_code == 200, 'bad response'
 
     soup = BeautifulSoup(response.content, 'html.parser')
-    # breakpoint()
 
     return [
         {'url': f"https://www.ukrinform.ua{i.get('href')}/block-lastnews",
@@ -33,11 +31,9 @@ def create_article_urls(link):
     with Session() as session:
         print('Session')
         response = session.get(link)
-        # print(response)
         assert response.status_code == 200, 'bad response'
 
     soup = BeautifulSoup(response.content, 'html.parser')
-    # breakpoint()
 
     return (
         f"https://www.ukrinform.ua{i.get('href')}"
@@ -56,7 +52,6 @@ def worker(queue: Queue, authors_list):
                 assert response.status_code == 200, "bad response"
         except Exception as error:
             print('ERROR', error)
-        # with Lock():
         process(response, url, category_name, authors_list)
 
         if queue.empty():
@@ -67,21 +62,17 @@ def worker(queue: Queue, authors_list):
 def process(resp, url, category_name, authors_list):
     try:
         soup = BeautifulSoup(resp.text, 'html.parser')
-        # breakpoint()
         picture = soup.select(".newsImage")[0].get('src')
 
-        # breakpoint()
         name = soup.select("h1")[0].text.strip()
         description = soup.select('.newsHeading')[0].text.strip()
         text = soup.select(".newsText p")
         text = ''.join([f'<p>{item.text.strip()}</p>' for item in text])
-        # breakpoint()
         tags = [i.text.strip() for i in soup.select(".tags a")]
         date = soup.select(".newsDate")[0].text.strip()
 
         date = '-'.join(date.split()[0].split('.')[::-1]) + ' ' + date.split()[
             1]
-        # breakpoint()
         category, _ = Category.objects.get_or_create(
             name=category_name,
             slug=f"{url.split('/')[-2]}"
@@ -132,7 +123,6 @@ def process(resp, url, category_name, authors_list):
             base_url=picture
         )
 
-
     except Exception as error:
         print(error)
 
@@ -166,18 +156,15 @@ def main():
     authors_list = create_authors_list('https://www.ukrinform.ua/authors')
 
     category_urls = create_category_urls(url)
-    # for dict_ in category_urls[:1]:
     for dict_ in category_urls:
 
         article_urls = create_article_urls(dict_['url'])
 
         worker_numb = 10
-        # worker_numb = 1
 
         queue = Queue()
 
         for url in list(article_urls)[:10]:
-            # for url in list(article_urls)[:1]:
             queue.put((url, dict_['category_name']))
 
         with ThreadPoolExecutor(max_workers=worker_numb) as tpe:

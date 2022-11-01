@@ -8,7 +8,7 @@ class Command(BaseCommand):
 
         try:
             main()
-            print('jaga-jaga-buums')
+
         except Exception:
             raise CommandError('Error scraping')
 

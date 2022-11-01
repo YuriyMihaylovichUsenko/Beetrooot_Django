@@ -46,6 +46,7 @@ INSTALLED_APPS = [
     'widget_tweaks',
 
     'newspaper',
+    'users',
 
     'django_cleanup.apps.CleanupConfig',
 ]
@@ -84,7 +85,6 @@ TEMPLATES = [
                 'newspaper.context_processor.popular_articles',
             ],
             'libraries':{
-                'oldety': 'newspaper.templatetags.oldety',
                 'switch_i18n': 'newspaper.templatetags.i18n_switcher',
                 'translater': 'newspaper.templatetags.translater',
             }

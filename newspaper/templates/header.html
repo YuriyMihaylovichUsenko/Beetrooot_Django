@@ -6,7 +6,7 @@
         <div class="top_bar margin-15">
             <div class="row">
                 <div class="col-md-6 col-sm-12 time">
-                    <div class="off-canvas-toggle" id="off-canvas-toggle"><span></span><p class="sidebar-open">{% trans 'Sing in' %}</p></div>
+                    <div class="off-canvas-toggle" id="off-canvas-toggle"><span></span><a href="{% url 'signup' %}">{% trans 'Sing up' %}</a></div>
                     <i class="fa fa-clock-o"></i><span>&nbsp;&nbsp;&nbsp;{{ datetime_now|date:'Y-m-d'  }}</span>
 {#                    <div class="header-lang">#}
                         {% get_current_language as LANGUAGE_CODE %}

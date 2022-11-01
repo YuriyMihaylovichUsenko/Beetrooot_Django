@@ -12,7 +12,6 @@ class ImageInlineAdmin(admin.TabularInline):
     readonly_fields = fields
     extra = 0
 
-
     @staticmethod
     def picture(obj):
         return format_html(
@@ -28,7 +27,6 @@ class ArticleAdmin(SummernoteModelAdmin):  # instead of ModelAdmin
     prepopulated_fields = {'slug': ('title', )}
     search_fields = ('title', 'text')
     list_filter = ('tags',)
-    # list_editable = ('base_url',)
 
     fieldsets = (
         (None, {
@@ -52,6 +50,7 @@ class ArticleAdmin(SummernoteModelAdmin):  # instead of ModelAdmin
         return mark_safe(
             '<img src="/static/admin/img/icon-no.svg" alt="False">')
 
+
 class ImageAdmin(admin.ModelAdmin):
     list_display = ('picture', )
 
@@ -59,6 +58,8 @@ class ImageAdmin(admin.ModelAdmin):
         return format_html(
               '<img src="{}" style="max-width: 50px">', obj.image.url
         )
+
+
 class TagAdmin(admin.ModelAdmin):
     actions = [translate_objects]
     list_display = ('name', 'name_en', 'count_article', 'id')
@@ -68,11 +69,13 @@ class TagAdmin(admin.ModelAdmin):
     def get_queryset(self, request):
         queryset = super().get_queryset(request)
         return queryset.prefetch_related('article')
+
     @staticmethod
     def count_article(obj):
         count = obj.article.count()
         link = f'/admin/newspaper/article/?tags__id__exact={obj.id}'
         return format_html(f'<a href="{link}">{count} article</a>')
+
 
 class AuthorAdmin(admin.ModelAdmin):
     actions = [translate_objects]
@@ -88,6 +91,7 @@ class AuthorAdmin(admin.ModelAdmin):
         count = obj.article_set.count()
         link = f'/admin/newspaper/article/?author__id__exact={obj.id}'
         return format_html(f'<a href="{link}">{count} article</a>')
+
 
 class CategoryAdmin(admin.ModelAdmin):
     actions = [translate_objects]

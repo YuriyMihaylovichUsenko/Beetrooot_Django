@@ -6,7 +6,6 @@ from django.db.models import Max, Count, Q
 from django.views.generic import DetailView, ListView, FormView
 from django.urls import reverse
 from django.contrib import messages
-from django.core.mail import send_mail, settings
 
 from .models import Article, Comment, Category, Tag, Author
 from .forms import CommentForm
@@ -33,20 +32,17 @@ class AllArticlesView(ListView):
     template_name = 'category-grid.html'
     model = Article
     context_object_name = 'articles'
-    # slug_url_kwarg = 'slug'
     paginate_by = 6
 
     def get(self, request, *args, **kwargs):
-        # if page_by := self.request.GET.get('count'):
-        #     self.paginate_by = page_by
         self.category = Category.objects.get(name=self.request.GET['category']) \
             if self.request.GET.get('category') else None
         self.tag = Tag.objects.get(name=self.request.GET['tag']) \
             if self.request.GET.get('tag') else None
         self.author = Author.objects.get(name=self.request.GET['author']) \
             if self.request.GET.get('author') else None
-        self.search = self.request.GET['s'] \
-            if self.request.GET.get('s') else None
+        # self.search = self.request.GET['s'] \
+        #     if self.request.GET.get('s') else None
         return super().get(request, *args, **kwargs)
 
     def get_queryset(self):
@@ -57,12 +53,11 @@ class AllArticlesView(ListView):
             _filter |= {'tags': self.tag}
         if self.author:
             _filter |= {'author': self.author}
-        if self.search:
-            _filter |= {'author': self.author}
+
         articles = Article.objects.prefetch_related(
             'images', 'category', 'tags', 'author'
         ).filter(**_filter).order_by('-date_news')
-        print(articles)
+
         return articles
 
 
@@ -70,8 +65,6 @@ class SearchView(ListView):
     template_name = 'category-grid.html'
     model = Article
     context_object_name = 'articles'
-    # slug_url_kwarg = 'slug'
-    paginate_by = 6
 
     def get(self, request, *args, **kwargs):
         self.search = self.request.GET['s'] \
@@ -165,7 +158,6 @@ class SingleView(FormView, DetailView):
             context={'name': form.cleaned_data.get('name'),
                      'link': self.request.build_absolute_uri(reverse('index'))
                      },
-            # message='Sank you'
         )
 
         return super().form_valid(form)
@@ -177,16 +169,3 @@ class SingleView(FormView, DetailView):
         return super().form_invalid(form)
 
 
-# class TagsViews(ListView):
-#     template_name = 'category-tags.html'
-#     model = Article
-#     context_object_name = 'tags'
-#     slug_url_kwarg = 'slug'
-#     paginate_by = 2
-#
-#     def get_queryset(self):
-#         return Article.objects.prefetch_related(
-#             'images', 'author'
-#         ).filter(
-#             tags__slug=self.kwargs.get('slug')
-#         ).order_by('-date_news')
